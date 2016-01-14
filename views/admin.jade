@@ -8,6 +8,7 @@ html(lang='en')
     meta(name='author', content='')
     title Mikkelin kaupungin kesätyöhakemus
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css')
     link(rel='stylesheet', href='/css/admin.css')
   body
     #wrapper
@@ -16,26 +17,27 @@ html(lang='en')
         ul.sidebar-nav
           li.sidebar-brand
             a(href='#')
-              | Mikkelin kaupungin kesätyöhakemukset
+              | Kesätyöhakemukset
           li
-            a(href='#') Käsittelemättä
+            a(href='/admin/waiting') Käsittelemättä
           li
-            a(href='#') Käsittelyssä
+            a(href='/admin/processing') Käsittelyssä
           li
-            a(href='#') Varattu
+            a(href='/admin/reserved') Varattu
           li
-            a(href='#') Ilmoitettu
+            a(href='/admin/notified') Ilmoitettu
           li
-            a(href='#') Tulo varmistettu
+            a(href='/admin/confirmed') Tulo varmistettu
           li
-            a(href='#') Työsopimus tehty
+            a(href='/admin/contract') Työsopimus tehty
           li
-            a(href='#') Hylätty
+            a(href='/admin/denied') Hylätty
       #page-content-wrapper
         .container-fluid
           .row
             .col-lg-12
-              h1 Käsittelemättä
+              a#menu-toggle.btn.btn-default(href='#menu-toggle') Piilota/näytä valikko
+              h1 #{state}
               table#applicationTable
                 thead
                   tr
@@ -51,8 +53,6 @@ html(lang='en')
                       td #{application.address}
                       td #{application.phone}
                       td #{application.email}
-                  
-              a#menu-toggle.btn.btn-default(href='#menu-toggle') Piilota/näytä valikko
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
     script(src='/lib/moment-with-locales.min.js')
