@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title #{application.firstName} #{application.lastName} kesätyöhakemus
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+  body
+    .container
+      h3 kesätyöhakemus
+      p Hakija:
+      address
+        strong #{application.firstName} #{application.lastName}
+        br
+        | #{application.address}
+        br
+        | #{application.zipcode} #{application.city}
+        abbr(title='Puhelin') Puh:
+        | #{application.phone}
+        br
+        a(href='mailto:'+application.email) #{application.email}
+      br
+	  p Synt.aika: #{application.birthday}
+	  p Sukupuoli: #{application.sex}
+	  p Synt.paikka: #{application.placeOfBirth}
+	  p Kotipaikka: #{application.home}
+	  p Ajokortti:
+	    each licence in application.driversLicence
+		  | #{licence},
+	  p Ajokortin hankintavuosi: #{application.driversLicenceYear}
+	  p Koulutus:
+	    br
+		| #{application.education}
+	  
+    
+    script(src='https://code.jquery.com/jquery-1.12.0.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
+    script(src='/lib/moment-with-locales.min.js')
