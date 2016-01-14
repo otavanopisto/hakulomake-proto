@@ -7,9 +7,14 @@ module.exports = function(app, root){
   });
   
   app.get('/admin/:state', function(req, res){
-    var state = req.param.state;
+    var state = req.params.state;
+    Application.find({state: state})
+      .sort({ added: 1 })
+      .exec(function(err, applications){
+        res.render('admin', {applications: applications, state: state});
+      });
   });
-	
+  
   app.post('/application', function(req, res){
 
     req.checkBody('firstnameInput', 'Syötä etunimi').notEmpty();
