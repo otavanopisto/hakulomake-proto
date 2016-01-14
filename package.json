@@ -1,0 +1,21 @@
+{
+  "name": "sjApplication",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": {
+    "name": "Belvain",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "body-parser": "*",
+    "express-session": "*",
+    "cookie-parser": "*",
+    "jade": "*",
+    "underscore": "*",
+    "async": "*",
+    "express-validator": "*"
+  }
+}
