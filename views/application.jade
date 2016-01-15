@@ -10,6 +10,15 @@ html(lang='en')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='/css/animate.css')
   body
+  - var getLanguageSkill = function(code){  
+  -   if(code === 'bad'){
+  -      return 'auttava';
+  -    }else if(code == 'ok'){
+  -      return 'kohtalainen';
+  -    }else if(code == 'good'){
+  -      return 'hyvä';
+  -    }
+  - }
     input#applicationId(type='hidden', value=application.id)
     .container
       h3 Kesätyöhakemus
@@ -83,10 +92,10 @@ html(lang='en')
               | Hylätty
       p
         b Synt.aika: 
-        | #{application.birthday}
+        span#applicant-birthday #{application.birthday}
       p
         b Sukupuoli: 
-        | #{application.sex}
+        span#applicant-sex #{application.sex}
       p
         b Synt.paikka: 
         | #{application.placeOfBirth}
@@ -126,17 +135,17 @@ html(lang='en')
         ul
           li Englanti: 
             if(application.languages.english)
-              | #{application.languages.english}
+              | #{getLanguageSkill(application.languages.english)}
             else
               | Ei
           li Ruotsi: 
             if(application.languages.swedish)
-              | #{application.languages.swedish}
+              | #{getLanguageSkill(application.languages.swedish)}
             else
               | Ei
           li Saksa: 
             if(application.languages.german)
-              | #{application.languages.german}
+              | #{getLanguageSkill(application.languages.german)}
             else
               | Ei
       p
