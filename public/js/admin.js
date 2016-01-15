@@ -9,7 +9,8 @@
 	$('#applicationTable').DataTable();
 	
 	$('#applicationTable tr').click(function(e){
-		window.location.href = '/application/'+$(this).attr('data-application-id');
+		var id = $(this).attr('data-application-id').replace(/"/g, '');
+		window.location.href = '/application/'+id;
 	});
 	
 })();
