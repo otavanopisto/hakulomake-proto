@@ -22,6 +22,8 @@ html(lang='en')
     input#applicationId(type='hidden', value=application.id)
     .container
       h3 Kesätyöhakemus
+      p Lähetetty: 
+        span#application-added(data-added=application.added)
       .row
         .col-md-6
           p
