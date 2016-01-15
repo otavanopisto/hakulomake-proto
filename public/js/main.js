@@ -35,6 +35,7 @@
 			}
 		}
 		$('#loader-img').show();
+		$('.error-container').remove();
 		$.post('/application', values, function(res){
 			noty({
 			    text: 'Kesätyöhakemus lähetetty onnistuneesti.',
@@ -57,6 +58,13 @@
 			        close: 'animated fadeOut',
 			    }
 			});
+			var errors = err.responseJSON;
+			for(var i = 0; i < errors.length;i++){
+				var error = errors[i];
+				if(typeof(error.param) !== 'undefined'){
+					$('label[for="'+error.param+'"]').after('<span class="error-container">'+error.msg+'</span>');
+				}
+			}
 			$('#loader-img').hide();
 		});
 	});
