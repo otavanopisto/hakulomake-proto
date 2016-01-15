@@ -6,6 +6,26 @@ module.exports = function(app, root){
     res.render('form');
   });
   
+  app.post('/update/state', function(req, res){
+    var id = req.body.id;
+    var state = req.body.state;
+    Application.findById(id, function(err, application){
+      if(err){
+        res.status(400).send();
+      }else{
+        application.state = state;
+        application.save(function(err, application){
+          if(err){
+            res.status(400).send();
+          }else{
+            res.send(application);
+          }
+        });  
+      }
+      
+    });
+  });
+  
   app.get('/application/:id', function(req, res){
     var id = req.params.id;
     Application.findById(id, function(err, application){
@@ -17,8 +37,11 @@ module.exports = function(app, root){
     });
   });
   
-  app.get('/admin/:state', function(req, res){
+  app.get('/admin/:state*?', function(req, res){
     var state = req.params.state;
+    if(typeof(state) == 'undefined' || state == ''){
+      state = 'waiting';
+    }
     Application.find({state: state})
       .sort({ added: 1 })
       .exec(function(err, applications){

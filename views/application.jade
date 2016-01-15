@@ -8,22 +8,79 @@ html(lang='en')
     meta(name='author', content='')
     title #{application.firstName} #{application.lastName} kesätyöhakemus
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+    link(rel='stylesheet', href='/css/animate.css')
   body
+    input#applicationId(type='hidden', value=application.id)
     .container
-      h3 kesätyöhakemus
-      p Hakija:
-      address
-        strong #{application.firstName} #{application.lastName}
-        br
-        | #{application.address}
-        br
-        | #{application.zipcode} #{application.city}
-        br
-        abbr(title='Puhelin') Puh:
-        | #{application.phone}
-        br
-        a(href='mailto:'+application.email) #{application.email}
-      br
+      h3 Kesätyöhakemus
+      .row
+        .col-md-6
+          p
+            b Hakija:
+          address
+            strong #{application.firstName} #{application.lastName}
+            br
+            | #{application.address}
+            br
+            | #{application.zipcode} #{application.city}
+            br
+            abbr(title='Puhelin') Puh:
+            | #{application.phone}
+            br
+            a(href='mailto:'+application.email) #{application.email}
+        .col-md-6
+          img#loader-img(src='/img/ajax-loader.gif', style='display:none;float:left;')
+          label.col-md-4.control-label(for='stateInput') Hakemuksen tila:
+          br
+          .radio
+            label(for='stateInput-0')
+              if application.state == 'waiting'
+                input#stateInput-0(name='stateInput', value='waiting', checked='checked', type='radio')
+              else
+                input#stateInput-0(name='stateInput', value='waiting', type='radio')
+              | Käsittelemättä
+          .radio
+            label(for='stateInput-1')
+              if application.state == 'processing'
+                input#stateInput-1(name='stateInput', value='processing', checked='checked', type='radio')
+              else
+                input#stateInput-1(name='stateInput', value='processing', type='radio')
+              | Käsittelyssä
+          .radio
+            label(for='stateInput-2')
+              if application.state == 'reserved'
+                input#stateInput-2(name='stateInput', value='reserved', checked='checked', type='radio')
+              else
+                input#stateInput-2(name='stateInput', value='reserved', type='radio')
+              | Varattu
+          .radio
+            label(for='stateInput-3')
+              if application.state == 'notified'
+                input#stateInput-3(name='stateInput', value='notified', checked='checked', type='radio')
+              else
+                input#stateInput-3(name='stateInput', value='notified', type='radio')
+              | Ilmoitettu
+          .radio
+            label(for='stateInput-4')
+              if application.state == 'confirmed'
+                input#stateInput-4(name='stateInput', value='confirmed',checked='checked', type='radio')
+              else
+                input#stateInput-4(name='stateInput', value='confirmed', type='radio')
+              | Tulo varmistettu
+          .radio
+            label(for='stateInput-5')
+              if application.state == 'contract'
+                input#stateInput-5(name='stateInput', value='contract', checked='checked', type='radio')
+              else
+                input#stateInput-5(name='stateInput', value='contract', type='radio')
+              | Työsopimus tehty
+          .radio
+            label(for='stateInput-6')
+              if application.state == 'denied'
+                input#stateInput-6(name='stateInput', value='denied', checked='checked', type='radio')
+              else
+                input#stateInput-6(name='stateInput', value='denied', type='radio')
+              | Hylätty
       p
         b Synt.aika: 
         | #{application.birthday}
@@ -39,7 +96,7 @@ html(lang='en')
       p
         b Ajokortti: 
         each licence in application.driversLicence
-            | #{licence},
+            | #{licence}, 
       p
         b Ajokortin hankintavuosi: 
         | #{application.driversLicenceYear}
@@ -64,6 +121,60 @@ html(lang='en')
         ul
           each allergy in application.allergies
             li #{allergy}
+      p
+        b Kielitaito:
+        ul
+          li Englanti: 
+            if(application.languages.english)
+              | #{application.languages.english}
+            else
+              | Ei
+          li Ruotsi: 
+            if(application.languages.swedish)
+              | #{application.languages.swedish}
+            else
+              | Ei
+          li Saksa: 
+            if(application.languages.german)
+              | #{application.languages.german}
+            else
+              | Ei
+      p
+        b Sopiva työskentelyjakso
+        ul
+          each period in application.suitableWorkingPeriod
+            li #{period}
+      p
+        b Käytettävissä olevat kulkuneuvot
+        ul
+          each transport in application.transportation
+            li #{transport}
+      p
+        b Harrastukset yms:
+        br
+        | #{application.additionalInfo}
+      p
+        b Ensisijainen hakutoive:
+        br
+        | #{application.primaryRequest}
+      p
+        b Toissijainen hakutoive:
+        br
+        | #{application.secondaryRequest}
+      if application.othersOk
+        p On valmis vastaanottamaan myös muuta työtä.
+      else
+        p Ei ole valmis vastaanottamaan muuta työtä.
+      p
+        b Perusohjaajakurssit:
+        br
+        | #{application.basicDirectorCourses}
+      p
+        b Lajiohjaajakurssit:
+        br
+        | #{application.fieldDirectorCourses}
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
     script(src='/lib/moment-with-locales.min.js')
+    script(src='/lib/jquery.noty.packaged.min.js')
+    script(src='/js/application.js')
