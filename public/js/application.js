@@ -7,6 +7,9 @@
 	var birthday = moment($('#applicant-birthday').text());
 	$('#applicant-birthday').text(birthday.format('D.M.YYYY'));
 	
+	var added = moment($('#application-added').data('data-added'));
+	$('#application-added').text(added.format('D.M.YYYY'));
+	
 	$('input[name="stateInput"]').change(function(){
 		var id = $('#applicationId').val();
 		var newState = $(this).val();
