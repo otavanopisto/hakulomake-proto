@@ -6,12 +6,27 @@ module.exports = function(app, root){
     res.render('form');
   });
   
+  app.get('/application/:id', function(req, res){
+    var id = req.params.id;
+    Application.findById(id, function(err, application){
+      if(err){
+        res.status(404).send();
+      }else{
+        res.render('application', {application: application});
+      }
+    });
+  });
+  
   app.get('/admin/:state', function(req, res){
     var state = req.params.state;
     Application.find({state: state})
       .sort({ added: 1 })
       .exec(function(err, applications){
-        res.render('admin', {applications: applications, state: state});
+        if(err){
+          res.status(404).send();
+        }else{
+          res.render('admin', {applications: applications, state: state});
+        }
       });
   });
   

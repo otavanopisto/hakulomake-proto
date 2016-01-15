@@ -18,24 +18,52 @@ html(lang='en')
         | #{application.address}
         br
         | #{application.zipcode} #{application.city}
+        br
         abbr(title='Puhelin') Puh:
         | #{application.phone}
         br
         a(href='mailto:'+application.email) #{application.email}
       br
-	  p Synt.aika: #{application.birthday}
-	  p Sukupuoli: #{application.sex}
-	  p Synt.paikka: #{application.placeOfBirth}
-	  p Kotipaikka: #{application.home}
-	  p Ajokortti:
-	    each licence in application.driversLicence
-		  | #{licence},
-	  p Ajokortin hankintavuosi: #{application.driversLicenceYear}
-	  p Koulutus:
-	    br
-		| #{application.education}
-	  
-    
+      p
+        b Synt.aika: 
+        | #{application.birthday}
+      p
+        b Sukupuoli: 
+        | #{application.sex}
+      p
+        b Synt.paikka: 
+        | #{application.placeOfBirth}
+      p
+        b Kotipaikka: 
+        | #{application.home}
+      p
+        b Ajokortti: 
+        each licence in application.driversLicence
+            | #{licence},
+      p
+        b Ajokortin hankintavuosi: 
+        | #{application.driversLicenceYear}
+      p
+        b Koulutus:
+        br
+        | #{application.education}
+      p
+        b Kokemus:
+        br
+        | #{application.previousExpericence}
+      p
+        b ATK-taidot:
+        br
+        | #{application.itSkills}
+      if application.previouslyEmployed
+        p Työskennellyt aikaisemmin Mikkelin kaupungille: #{application.whenEmployed}
+      else
+        p Ei työskennellyt aikaisemmin Mikkelin kaupungille
+      p
+        b Allergiat:
+        ul
+          each allergy in application.allergies
+            li #{allergy}
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
     script(src='/lib/moment-with-locales.min.js')

@@ -8,4 +8,8 @@
 	
 	$('#applicationTable').DataTable();
 	
+	$('#applicationTable tr').click(function(e){
+		window.location.href = '/application/'+$(this).attr('data-application-id');
+	});
+	
 })();
