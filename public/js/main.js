@@ -34,10 +34,30 @@
 				}
 			}
 		}
+		$('#loader-img').show();
 		$.post('/application', values, function(res){
-			console.log(res);
+			noty({
+			    text: 'Kesätyöhakemus lähetetty onnistuneesti.',
+				type: 'success',
+				timeout: 3000,
+			    animation: {
+			        open: 'animated fadeIn',
+			        close: 'animated fadeOut',
+			    }
+			});
+			$('input,textarea').val('');
+			$('#loader-img').hide();
 		}).fail(function(err){
-			console.log(err);
+			noty({
+			    text: 'Hakemuksen lähetys epäonnistui, tarkista kentät ja yritä uudelleen.',
+				type: 'error',
+				timeout: 3000,
+			    animation: {
+			        open: 'animated fadeIn',
+			        close: 'animated fadeOut',
+			    }
+			});
+			$('#loader-img').hide();
 		});
 	});
 	
