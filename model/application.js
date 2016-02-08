@@ -1,7 +1,19 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+  // Fields for application handler
   state: { type: String, default:'waiting', enum: ['waiting', 'processing', 'reserved', 'notified', 'confirmed', 'contract', 'denied'] },
+  organizationalUnit: {type: String},
+  job: {type: String},
+  bossTitle: {type: String},
+  bossName: {type: String},
+  workingHours: {type: Number},
+  salary: {type: Number},
+  startDate: {type: Date},
+  endDate: {type: Date},
+  ssn: {type: String},
+  bankAccont: {type: String},
+  // Fields for applicant
   added: {type: Number, default: Date.now },
   firstName : { type: String, required: true },
   lastName : { type: String, required: true },
