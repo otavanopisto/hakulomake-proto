@@ -13,6 +13,7 @@ var schema = new mongoose.Schema({
   endDate: {type: Date},
   ssn: {type: String},
   bankAccont: {type: String},
+  info: {type: String},
   // Fields for applicant
   added: {type: Number, default: Date.now },
   firstName : { type: String, required: true },

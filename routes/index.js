@@ -1,4 +1,5 @@
 var Application = require('../model/application');
+var _ = require('underscore');
 
 module.exports = function(app, root){
   
@@ -6,23 +7,22 @@ module.exports = function(app, root){
     res.render('form');
   });
   
-  app.post('/update/state', function(req, res){
+  app.post('/update', function(req, res){
     var id = req.body.id;
-    var state = req.body.state;
+    var data = req.body.data;
     Application.findById(id, function(err, application){
       if(err){
-        res.status(400).send();
+        res.status(400).send(err);
       }else{
-        application.state = state;
+        application = _.extend(application, data);
         application.save(function(err, application){
           if(err){
-            res.status(400).send();
+            res.status(400).send(err);
           }else{
             res.send(application);
           }
         });  
       }
-      
     });
   });
   
