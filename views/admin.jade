@@ -19,19 +19,31 @@ html(lang='en')
             a(href='#')
               | Kesätyöhakemukset
           li
-            a(href='/admin/waiting') Käsittelemättä
+            span Hakemuksen tila:
+            br
+            select.filter(name='state')
+              option(value='') Kaikki
+              option(value='waiting') Käsittelemättä
+              option(value='processing') Käsittelyssä
+              option(value='reserved') Varattu
+              option(value='notified') Ilmoitettu
+              option(value='confirmed') Tulo varmistettu
+              option(value='contract') Työsopimus tehty
+              option(value='denied') Hylätty
           li
-            a(href='/admin/processing') Käsittelyssä
+            span Ensisijainen toive:
+            br
+            select.filter(name='primary')
+              option(value='') Kaikki
+              each position in positions
+                option(value=position.code) #{position.name}
           li
-            a(href='/admin/reserved') Varattu
-          li
-            a(href='/admin/notified') Ilmoitettu
-          li
-            a(href='/admin/confirmed') Tulo varmistettu
-          li
-            a(href='/admin/contract') Työsopimus tehty
-          li
-            a(href='/admin/denied') Hylätty
+            span Toissijainen toive:
+            br
+            select.filter(name='secondary')
+              option(value='') Kaikki
+              each position in positions
+                option(value=position.code) #{position.name}
       #page-content-wrapper
         .container-fluid
           .row

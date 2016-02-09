@@ -278,12 +278,20 @@ html(lang='en')
           .form-group
             label.col-md-4.control-label(for='primaryRequestInput') Haen ensisijaisesti seuraavaan toimipisteeseen/työpaikkaan
             .col-md-4
-              textarea#primaryRequestInput.form-control(name='primaryRequestInput', required='')
+              select#primaryRequestInput.form-control(name='primaryRequestInput', required='')
+                option(value='') Valitse...
+                each position in positions
+                  option(value=position.code) #{position.name}
+              //textarea#primaryRequestInput.form-control(name='primaryRequestInput', required='')
           // Textarea
           .form-group
             label.col-md-4.control-label(for='secondaryRequestInput') Haen toissijaisesti seuraavaan toimipisteeseen/työpaikkaan
             .col-md-4
-              textarea#secondaryRequestInput.form-control(name='secondaryRequestInput', required='')
+              select#secondaryRequestInput.form-control(name='secondaryRequestInput', required='')
+                option(value='') Valitse...
+                each position in positions
+                  option(value=position.code) #{position.name}
+              //textarea#secondaryRequestInput.form-control(name='secondaryRequestInput', required='')
           // Multiple Radios (inline)
           .form-group
             label.col-md-4.control-label(for='othersOk')

@@ -1,10 +1,10 @@
 var Application = require('../model/application');
 var _ = require('underscore');
 
-module.exports = function(app, root){
+module.exports = function(app, config){
   
-  app.get(root, function(req, res){
-    res.render('form');
+  app.get(config.server_root, function(req, res){
+    res.render('form', {positions: config.positions});
   });
   
   app.post('/update', function(req, res){
@@ -37,18 +37,24 @@ module.exports = function(app, root){
     });
   });
   
-  app.get('/admin/:state*?', function(req, res){
-    var state = req.params.state;
-    if(typeof(state) == 'undefined' || state == ''){
-      state = 'waiting';
+  app.get('/admin', function(req, res){
+    var query = {};
+    if(typeof(req.query.state == 'undefined' && req.query.state !== '')){
+      query.state = req.query.state;
     }
-    Application.find({state: state})
+    if(typeof(req.query.primary == 'undefined' && req.query.primary !== '')){
+      query.primaryRequest = req.query.primary;
+    }
+    if(typeof(req.query.secondary == 'undefined' && req.query.secondary !== '')){
+      query.secondaryRequest = req.query.secondary;
+    }
+    Application.find(query)
       .sort({ added: 1 })
       .exec(function(err, applications){
         if(err){
           res.status(404).send();
         }else{
-          res.render('admin', {applications: applications, state: state});
+          res.render('admin', {applications: applications, state: 'Hakemukset', positions: config.positions});
         }
       });
   });

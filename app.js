@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(expressValidator());
 
-require('./routes')(app, config.server_root);
+require('./routes')(app, config);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
