@@ -5,6 +5,8 @@ module.exports = {
   database: {
     host: 'localhost',
     table: 'sjapplication'
-  }
-  
+  },
+  positions: [
+    { name: 'Paikka yksi', code:'place1'}
+  ]
 };
