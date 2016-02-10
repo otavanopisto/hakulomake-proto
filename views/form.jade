@@ -13,10 +13,14 @@ html(lang='en')
     link(rel='stylesheet', href='/css/main.css')
   body
     .container
+      .row
+        .col-md-4
+        .col-md-4
+          br
+          img.img-responsive.center-block(src='/img/city_logo.jpg')
+        .col-md-4
       form.form-horizontal#main-form
         fieldset
-          // Form Name
-          h3 Mikkelin kaupungin kesätyöhakemus
           br
           br
           // Text input
@@ -236,22 +240,22 @@ html(lang='en')
             label.col-md-4.control-label(for='suitableWorkingPeriodInput') Sopivin työjakso
             .col-md-4
               label.checkbox-inline(for='suitableWorkingPeriodInput-0')
-                input#suitableWorkingPeriodInput-0(name='suitableWorkingPeriodInput', value='huhtikuu', type='checkbox', checked='checked')
+                input#suitableWorkingPeriodInput-0(name='suitableWorkingPeriodInput', value='huhtikuu', type='checkbox')
                 |       huhtikuu
-              label.checkbox-inline(for='suitableWorkingPeriodInput-1')
-                input#suitableWorkingPeriodInput-1(name='suitableWorkingPeriodInput', value='kesäkuu', type='checkbox', checked='checked')
-                |       kesäkuu
-              label.checkbox-inline(for='suitableWorkingPeriodInput-2')
-                input#suitableWorkingPeriodInput-2(name='suitableWorkingPeriodInput', value='elokuu', type='checkbox', checked='checked')
-                |       elokuu
               label.checkbox-inline(for='suitableWorkingPeriodInput-3')
-                input#suitableWorkingPeriodInput-3(name='suitableWorkingPeriodInput', value='toukokuu', type='checkbox', checked='checked')
-                |       toukokuu
+                input#suitableWorkingPeriodInput-3(name='suitableWorkingPeriodInput', value='toukokuu', type='checkbox')
+                |       toukokuu                
+              label.checkbox-inline(for='suitableWorkingPeriodInput-1')
+                input#suitableWorkingPeriodInput-1(name='suitableWorkingPeriodInput', value='kesäkuu', type='checkbox')
+                |       kesäkuu
               label.checkbox-inline(for='suitableWorkingPeriodInput-4')
-                input#suitableWorkingPeriodInput-4(name='suitableWorkingPeriodInput', value='heinäkuu', type='checkbox', checked='checked')
+                input#suitableWorkingPeriodInput-4(name='suitableWorkingPeriodInput', value='heinäkuu', type='checkbox')
                 |       heinäkuu
+              label.checkbox-inline(for='suitableWorkingPeriodInput-2')
+                input#suitableWorkingPeriodInput-2(name='suitableWorkingPeriodInput', value='elokuu', type='checkbox')
+                |       elokuu
               label.checkbox-inline(for='suitableWorkingPeriodInput-5')
-                input#suitableWorkingPeriodInput-5(name='suitableWorkingPeriodInput', value='syyskuu', type='checkbox', checked='checked')
+                input#suitableWorkingPeriodInput-5(name='suitableWorkingPeriodInput', value='syyskuu', type='checkbox')
                 |       syyskuu
           // Multiple Checkboxes
           .form-group
@@ -280,19 +284,20 @@ html(lang='en')
             .col-md-4
               select#primaryRequestInput.form-control(name='primaryRequestInput', required='')
                 option(value='') Valitse...
-                each position in positions
-                  option(value=position.code) #{position.name}
-              //textarea#primaryRequestInput.form-control(name='primaryRequestInput', required='')
-          // Textarea
+                each department in positions
+                  optgroup(label=department.department)
+                    each job in department.jobs
+                      option(value=job.code) #{job.name}
           .form-group
             label.col-md-4.control-label(for='secondaryRequestInput') Haen toissijaisesti seuraavaan toimipisteeseen/työpaikkaan
             .col-md-4
               select#secondaryRequestInput.form-control(name='secondaryRequestInput', required='')
                 option(value='') Valitse...
-                each position in positions
-                  option(value=position.code) #{position.name}
-              //textarea#secondaryRequestInput.form-control(name='secondaryRequestInput', required='')
-          // Multiple Radios (inline)
+                each department in positions
+                  optgroup(label=department.department)
+                    each job in department.jobs
+                      option(value=job.code) #{job.name}
+
           .form-group
             label.col-md-4.control-label(for='othersOk')
               | Täytä tämä jos olet kiinnostunut ensisijaisten toiveittesi lisäksi muista tehtävistä

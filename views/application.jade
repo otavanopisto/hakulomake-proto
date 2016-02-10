@@ -117,11 +117,17 @@ html(lang='en')
             p
               b Ensisijainen hakutoive:
               br
-              | #{application.primaryRequest}
+              each position in positions
+                each job in position.jobs
+                  if job.code == application.primaryRequest
+                    | #{position.department} / #{job.name}
             p
               b Toissijainen hakutoive:
               br
-              | #{application.secondaryRequest}
+              each position in positions
+                each job in position.jobs
+                  if job.code == application.secondaryRequest
+                    | #{position.department} / #{job.name}
             if application.othersOk
               p On valmis vastaanottamaan myös muuta työtä.
             else
@@ -192,52 +198,55 @@ html(lang='en')
           br
           select#unitInput.form-control(name='organizationalUnit')
             option(value='') Valitse...
-            option(value='1') Puhtaanapito
-            option(value='2') Puistot
+            each position in positions
+              option(value=position.department, selected=application.organizationalUnit == position.department) #{position.department}
           br
           label.col-md-4.control-label(for='jobInput') Tehtävä:
           br
           select#jobInput.form-control(name='job')
             option(value='') Valitse...
-            option(value='1') Puutarhuri
-            option(value='2') Siivooja
+              each position in positions
+                optgroup(label=position.department)
+                  each job in position.jobs
+                    option(value=job.code, selected=application.job == job.code) #{job.name}
           br
           label.col-md-4.control-label(for='bossTitleInput') Esimiehen titteli:
           br
-          input#bossTitleInput.form-control(type='text', name='bossTitle')
+          input#bossTitleInput.form-control(type='text', name='bossTitle', value=application.bossTitle)
           br
           label.col-md-4.control-label(for='bossNameInput') Esimiehen nimi:
           br
-          input#bossNameInput.form-control(type='text', name='bossName')
+          input#bossNameInput.form-control(type='text', name='bossName', value=application.bossName)
           br
           label.col-md-4.control-label(for='jobTimeInput') Viikkotyöaika:
           br
           select#jobTimeInput.form-control(name='workingHours')
-            option(value='30') 30 tuntia
+            option(value='30', selected=application.workingHours == 30) 30 tuntia
           br
           label.col-md-4.control-label(for='salaryInput') Kuukausipalkka:
           br
-          input#salaryInput.form-control(type='text', name='salary')
+          input#salaryInput.form-control(type='text', name='salary', value=application.salary)
           br
           label.col-md-4.control-label(for='startDateInput') Aloituspäivä:
           br
-          input#startDateInput.form-control(type='date', name='startDate')
+          input#startDateInput.form-control(type='date', name='startDate', value=application.startDate)
           br
           label.col-md-4.control-label(for='endDateInput') Lopetuspäivä:
           br
-          input#endDateInput.form-control(type='date', name='endDate')
+          input#endDateInput.form-control(type='date', name='endDate', value=application.endDate)
           br
           label.col-md-4.control-label(for='ssnInput') Hetu:
           br
-          input#ssnInput.form-control(type='text', name='ssn')
+          input#ssnInput.form-control(type='text', name='ssn', value=application.ssn)
           br
           label.col-md-4.control-label(for='bankInfoInput') Pankkitili:
           br
-          input#bankInfoInput.form-control(type='text', name='bankAccont')
+          input#bankInfoInput.form-control(type='text', name='bankAccont', value=application.bankAccont)
           br
           label.col-md-4.control-label(for='huomInput') Lisätietoja:
           br
           textarea#huomInput.form-control(name='info')
+            | #{application.info}
           br
           br
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
