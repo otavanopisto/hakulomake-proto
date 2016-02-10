@@ -32,20 +32,20 @@ module.exports = function(app, config){
       if(err){
         res.status(404).send();
       }else{
-        res.render('application', {application: application});
+        res.render('application', {application: application, positions: config.positions});
       }
     });
   });
   
   app.get('/admin', function(req, res){
     var query = {};
-    if(typeof(req.query.state == 'undefined' && req.query.state !== '')){
+    if(typeof(req.query.state) !== 'undefined' && req.query.state !== ''){
       query.state = req.query.state;
     }
-    if(typeof(req.query.primary == 'undefined' && req.query.primary !== '')){
+    if(typeof(req.query.primary) !== 'undefined' && req.query.primary !== ''){
       query.primaryRequest = req.query.primary;
     }
-    if(typeof(req.query.secondary == 'undefined' && req.query.secondary !== '')){
+    if(typeof(req.query.secondary) !== 'undefined' && req.query.secondary !== ''){
       query.secondaryRequest = req.query.secondary;
     }
     Application.find(query)
@@ -54,7 +54,7 @@ module.exports = function(app, config){
         if(err){
           res.status(404).send();
         }else{
-          res.render('admin', {applications: applications, state: 'Hakemukset', positions: config.positions});
+          res.render('admin', {applications: applications, state: 'Hakemukset', positions: config.positions, query: query});
         }
       });
   });
