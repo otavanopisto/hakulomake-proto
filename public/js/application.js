@@ -15,6 +15,16 @@
 	var birthday = moment($('#applicant-birthday').text());
 	$('#applicant-birthday').text(birthday.format('D.M.YYYY'));
 	
+  var startDate = moment($('#startDateInput').val()).format('D.M.YYYY');
+  if(startDate !== 'Invalid date'){
+    $('#startDateInput').val(startDate);
+  }
+
+  var endDate = moment($('#endDateInput').val()).format('D.M.YYYY');
+  if(endDate !== 'Invalid date'){
+	 $('#endDateInput').val(endDate);
+  }
+  
 	var added = moment($('#application-added').data('data-added'));
 	$('#application-added').text(added.format('D.M.YYYY'));
   
@@ -49,6 +59,9 @@
   
   function getValues(){
     var application = {};
+    $('.staff-fields textarea').each(function(){
+        application[$(this).attr('name')] = $(this).val();
+    });
     $('.staff-fields select').each(function(){
         application[$(this).attr('name')] = $(this).val();
     });
@@ -67,6 +80,13 @@
   }
 	
   $('.staff-fields input[type="text"]').keyup(function(){
+    clearTimeout(fieldSaveTimer);
+    fieldSaveTimer = setTimeout(function(){
+      updateApplication();
+    }, 1500);
+  });
+  
+  $('.staff-fields textarea').keyup(function(){
     clearTimeout(fieldSaveTimer);
     fieldSaveTimer = setTimeout(function(){
       updateApplication();
