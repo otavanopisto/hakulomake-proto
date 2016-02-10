@@ -12,7 +12,7 @@
 		e.preventDefault();
 		for(var i = 0; i < e.target.length; i++){
 			var element = $(e.target[i]);
-			if(element.is('input') || element.is('textarea')){
+			if(element.is('input') || element.is('textarea') || element.is('select')){
 				if(element.attr('type') == 'checkbox'){
 					if(element.is(':checked')){
 						if(values.hasOwnProperty(element.attr('name'))){
