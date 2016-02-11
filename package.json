@@ -16,6 +16,12 @@
     "jade": "*",
     "underscore": "*",
     "async": "*",
-    "express-validator": "*"
+    "express-validator": "*",
+    "mailgun-js": "*",
+    "connect-flash": "*",
+    "password-generator": "*",
+    "passport" : "*",
+    "passport-local" : "*",
+    "bcrypt-nodejs" : "*"
   }
 }
