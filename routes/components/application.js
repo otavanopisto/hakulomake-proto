@@ -117,7 +117,7 @@ exports.createApplication = function(req, res){
       }else{
         var content = 'Kesätyöhakemuksesi on vastaanotettu onnistuneesti.'
         try {
-          content = jade.renderFile(__dirname+'/../views/mail.jade', {application: application, positions: config.positions});
+          content = jade.renderFile(__dirname+'/../../views/mail.jade', {application: application, positions: config.positions});
         }catch(renderEx){
           console.log(renderEx)
         }      

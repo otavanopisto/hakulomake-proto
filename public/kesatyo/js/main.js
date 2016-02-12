@@ -36,7 +36,7 @@
 		}
 		$('#loader-img').show();
 		$('.error-container').remove();
-		$.post('/application', values, function(res){
+		$.post(SERVER_ROOT+'/application', values, function(res){
 			noty({
 			    text: 'Kesätyöhakemus lähetetty onnistuneesti.',
 				type: 'success',

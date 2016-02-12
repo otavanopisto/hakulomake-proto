@@ -69,7 +69,7 @@ exports.logout = function(req, res) {
 };
 
 exports.manage = function(req, res){
-  res.render('usermanagement', {user : req.user, root: config.server_root});
+  res.render('usermanagement', {user : req.user, root: config.server_root, query: {state: '', primaryRequest: '', secondaryRequest: ''}, positions: config.positions});
 };
 
 exports.archieve = function(req, res){

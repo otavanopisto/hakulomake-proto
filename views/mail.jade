@@ -32,8 +32,11 @@ p Lähetetty:
     b Synt.aika: 
     span#applicant-birthday #{application.birthday}
   p
-    b Sukupuoli: 
-    span#applicant-sex #{application.sex}
+    b Sukupuoli:
+    if(application.sex == 'male')
+      span#applicant-sex Mies
+    else
+      span#applicant-sex Nainen
   p
     b Synt.paikka: 
     | #{application.placeOfBirth}

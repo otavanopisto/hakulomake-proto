@@ -32,7 +32,7 @@
     var data = getValues();
 		var id = $('#applicationId').val();
 		$('#loader-img').show();
-		$.post('/update', {id: id, data: data}, function(res){
+		$.post(SERVER_ROOT+'/update', {id: id, data: data}, function(res){
 			noty({
 			    text: 'Hakemuksen tila päivitetty onnistuneesti.',
 				type: 'success',

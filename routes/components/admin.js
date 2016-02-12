@@ -19,7 +19,7 @@ exports.renderAdminView = function(req, res){
       if(err){
         res.status(404).send();
       }else{
-        res.render('admin', {applications: applications, state: 'Hakemukset', positions: config.positions, query: query, root: config.server_root});
+        res.render('admin', {user : req.user, applications: applications, state: 'Hakemukset', positions: config.positions, query: query, root: config.server_root});
       }
     });
 };

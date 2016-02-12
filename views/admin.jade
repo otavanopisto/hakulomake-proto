@@ -1,80 +1,25 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='')
-    meta(name='author', content='')
-    title Mikkelin kaupungin kesätyöhakemus
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
-    link(rel='stylesheet', href='https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css')
-    link(rel='stylesheet', href=root+'/css/admin.css')
-    script
-      | var SERVER_ROOT = "#{root}"; 
-  body
-    #wrapper
-      // Sidebar
-      #sidebar-wrapper
-        ul.sidebar-nav
-          li.sidebar-brand
-            a(href='#')
-              | Kesätyöhakemukset
-          li
-            span Hakemuksen tila:
-            br
-            select#stateFilter.filter(name='state')
-              option(value='') Kaikki
-              option(value='waiting', selected=query.state == 'waiting') Käsittelemättä
-              option(value='processing', selected=query.state == 'processing') Käsittelyssä
-              option(value='reserved', selected=query.state == 'reserved') Varattu
-              option(value='notified', selected=query.state == 'notified') Ilmoitettu
-              option(value='confirmed', selected=query.state == 'confirmed') Tulo varmistettu
-              option(value='contract', selected=query.state == 'contract') Työsopimus tehty
-              option(value='denied', selected=query.state == 'denied') Hylätty
-          li
-            span Ensisijainen toive:
-            br
-            select#primaryRequestFilter.filter(name='primary')
-              option(value='') Kaikki
-              each department in positions
-                optgroup(label=department.department)
-                  each job in department.jobs
-                    option(value=job.code, selected=query.primaryRequest == job.code) #{job.name}
-          li
-            span Toissijainen toive:
-            br
-            select#secondaryRequestFilter.filter(name='secondary')
-              option(value='') Kaikki
-              each department in positions
-                optgroup(label=department.department)
-                  each job in department.jobs
-                    option(value=job.code, selected=query.primaryRequest == job.code) #{job.name}
-      #page-content-wrapper
-        .container-fluid
-          .row
-            .col-lg-12
-              a#menu-toggle.btn.btn-default(href='#menu-toggle') Piilota/näytä valikko
-              button#excelImport.btn.btn-default.pull-right Vie Exceliin
-              h1 #{state}
-              table#applicationTable
-                thead
-                  tr
-                    th Nimi
-                    th Osoite
-                    th Puhelin
-                    th Email
-                tbody
-                  each application in applications
-                    tr(data-application-id=application._id)
-                      td
-                        | #{application.firstName} #{application.lastName}
-                      td 
-                        | #{application.address} #{application.zipcode} #{application.city}
-                      td #{application.phone}
-                      td #{application.email}
-    script(src='https://code.jquery.com/jquery-1.12.0.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
-    script(src=root+'/lib/moment-with-locales.min.js')
-    script(src='https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js')
-    script(src=root+'/js/admin.js')
+extends layout
+
+block content
+  .container-fluid
+    .row
+      .col-lg-12
+        a#menu-toggle.btn.btn-default(href='#menu-toggle') Piilota/näytä valikko
+        button#excelImport.btn.btn-default.pull-right Vie Exceliin
+        h1 #{state}
+        table#applicationTable
+          thead
+            tr
+              th Nimi
+              th Osoite
+              th Puhelin
+              th Email
+          tbody
+            each application in applications
+              tr(data-application-id=application._id)
+                td
+                  | #{application.firstName} #{application.lastName}
+                td 
+                  | #{application.address} #{application.zipcode} #{application.city}
+                td #{application.phone}
+                td #{application.email}

@@ -6,7 +6,7 @@
     $('.filter').each(function(){
       queryString += $(this).attr('name')+'='+$(this).val()+'&';
     });
-    window.location.href = '/admin?'+queryString.slice(0, -1);
+    window.location.href = SERVER_ROOT+'/admin?'+queryString.slice(0, -1);
   });
   
   $('#excelImport').click(function(){
@@ -31,7 +31,7 @@
 	
 	$('#applicationTable tr').click(function(e){
 		var id = $(this).attr('data-application-id').replace(/"/g, '');
-		window.location.href = '/application/'+id;
+     window.open(SERVER_ROOT+'/application/'+id);
 	});
 	
 })();

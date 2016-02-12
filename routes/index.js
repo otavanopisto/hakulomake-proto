@@ -13,7 +13,7 @@ function authenticate(allowedRoles) {
         res.status(403).send('Go away!');
       }
     } else {
-      res.redirect('/login');
+      res.redirect(config.server_root+'/login');
     }
   };
 }
@@ -37,7 +37,7 @@ module.exports = function(app){
    * Navigation
    */
   app.get(config.server_root, function(req, res){
-    res.render('form', {positions: config.positions});
+    res.render('form', {positions: config.positions, root: config.server_root});
   });
   
   app.get(config.server_root+'/login', function(req, res) {
@@ -72,8 +72,8 @@ module.exports = function(app){
    */
   app.post(config.server_root+'/login', user.login);
   app.post(config.server_root+'/signup', authenticate(['admin']), user.create);
-  app.get(config.server_root+'/user/list',authenticate(['admin']), user.list);
-  app.postconfig.server_root+'/user/archieve', authenticate(['admin']), user.archieve);
+  app.get(config.server_root+'/user/list', authenticate(['admin']), user.list);
+  app.post(config.server_root+'/user/archieve', authenticate(['admin']), user.archieve);
   app.get(config.server_root+'/logout', user.logout);
   app.post(config.server_root+'/forgotpassword', user.forgotpassword);
   app.get(config.server_root+'/resetpassword/:token', user.resetpassword);
