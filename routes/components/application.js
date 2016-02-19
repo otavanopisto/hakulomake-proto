@@ -1,16 +1,33 @@
 var Application = require('../../model/application');
+var Appendix = require('../../model/appendix');
 var jade = require('jade');
 var mailer = require('../../services/mailer');
 var config = require('../../config');
+var async = require('async');
 var _ = require('underscore');
-  
+
 exports.getApplication = function(req, res){
   var id = req.params.id;
   Application.findById(id, function(err, application){
     if(err){
       res.status(404).send();
     }else{
-      res.render('application', {application: application, positions: config.positions, root: config.server_root});
+      var appendices = [];
+      async.each(application.appendices, function(appendixId, callback){
+        Appendix.findById(appendixId, function(err, appendix){
+          if(err){
+            callback(err);
+          }else{
+            appendices.push(appendix);
+            callback();
+          }
+        })
+      }, function(err){
+        if(err){
+          res.status(500).send();
+        }
+        res.render('application', {application: application, appendices: appendices, positions: config.positions, root: config.server_root});
+      }); 
     }
   });
 };
@@ -91,7 +108,8 @@ exports.createApplication = function(req, res){
       secondaryRequest: req.body['secondaryRequestInput'],
       othersOk: req.body['othersOk'],
       basicDirectorCourses: req.body['basicDirectorCoursesInput'],
-      fieldDirectorCourses: req.body['fieldDirectorCoursesInput']
+      fieldDirectorCourses: req.body['fieldDirectorCoursesInput'],
+      appendices: typeof(req.body['appendices']) !== 'undefined' ? req.body['appendices'] : []
     });
     
     if(req.body['englishInput'] !== '') 
@@ -110,6 +128,7 @@ exports.createApplication = function(req, res){
         application.allergies = [req.body['otherAllergies']];
       }
     }
+    
     
     application.save(function(err, application){
       if(err) {

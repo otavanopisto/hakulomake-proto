@@ -47,7 +47,8 @@ var schema = new mongoose.Schema({
   secondaryRequest: { type: String, required: true },
   othersOk: { type: Boolean, required: true },
   basicDirectorCourses: String,
-  fieldDirectorCourses: String
+  fieldDirectorCourses: String,
+  appendices: [String]
 });
 
 module.exports = mongoose.model('Application', schema);

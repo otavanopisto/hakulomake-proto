@@ -9,6 +9,7 @@ html(lang='en')
     title Mikkelin kaupungin kesätyöhakemus
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css')
+    link(rel='stylesheet', href=root+'/css/jquery.fileupload.css')
     link(rel='stylesheet', href=root+'/css/animate.css')
     link(rel='stylesheet', href=root+'/css/main.css')
     script
@@ -322,14 +323,30 @@ html(lang='en')
             .col-md-4
               textarea#fieldDirectorCoursesInput.form-control(name='fieldDirectorCoursesInput', placeholder='Lajiohjaajakurssit')
           .form-group
+            label.col-md-4.control-label
+              | Liitteet:
+            .col-md-4
+              span.btn.btn-success.fileinput-button
+                i.glyphicon.glyphicon-plus
+                span &nbsp;valitse liite...
+                input#appendixInput(type='file', name='appendix', multiple='multiple', data-url=root+'/upload')
+              br
+              br
+              #progress.progress
+                .progress-bar.progress-bar-success
+              #files.files
+          .form-group
             label.col-md-4.control-label(for='submitAssigmentBtn')
             .col-md-4
               img#loader-img(src=root+'/img/ajax-loader.gif', style='display:none;')
               button#submitAssigmentBtn.btn.btn-lg.btn-primary.pull-right(name='submitAssigmentBtn') Lähetä
+
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
+    script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/locales/bootstrap-datepicker.fi.min.js')
+    script(src=root+'/js/jquery.fileupload.js')
     script(src=root+'/lib/moment-with-locales.min.js')
     script(src=root+'/lib/jquery.noty.packaged.min.js')
     script(src=root+'/js/main.js')

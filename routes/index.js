@@ -2,6 +2,12 @@ var application = require('./components/application');
 var admin = require('./components/admin');
 var user = require('./components/user');
 var config = require('../config');
+var multer  = require('multer');
+var Appendix = require('../model/appendix');
+var upload = multer({ dest: 'uploads/' })
+var async = require('async');
+var path = require('path');
+var fs = require('fs');
 
 function authenticate(allowedRoles) {
   return function(req, res, next) {
@@ -36,8 +42,60 @@ module.exports = function(app){
   /*
    * Navigation
    */
+   
   app.get(config.server_root, function(req, res){
     res.render('form', {positions: config.positions, root: config.server_root});
+  });
+  
+  app.post(config.server_root+'/upload', upload.array('appendix'), function (req, res, next) {
+    var savedFiles = [];
+    async.each(req.files, function(file, callback){
+      var appendix = new Appendix();
+      appendix.originalname = file.originalname;
+      appendix.mimetype = file.mimetype;
+      appendix.filename = file.filename;
+      appendix.save(function(err, appendix){
+        if(err){
+          callback(err);
+        }else{
+          savedFiles.push(appendix);
+          callback();
+        }
+      });
+    }, function(err){
+      if(err){
+        res.status(500).send(err);
+      }else{
+        res.send(savedFiles);
+      }
+    });
+  });
+  
+  app.get(config.server_root+'/upload/:id', function (req, res) {
+    var id = req.params.id;
+    Appendix.findById(id, function(err, appendix){
+      if(err || !appendix){
+        res.status(404).send();
+      }else{
+        res.set('Content-Type', appendix.mimetype);
+        res.sendFile(path.resolve(__dirname+'/../uploads/'+appendix.filename));
+      }
+    });
+  });
+  
+  app.delete(config.server_root+'/upload/:id', function (req, res) {
+    var id = req.params.id;
+    Appendix.findById(id, function(err, appendix){
+      if(err || !appendix){
+        res.status(404).send();
+      }else{
+        fs.unlink(path.resolve(__dirname+'/../uploads/'+appendix.filename), function(){
+          Appendix.findByIdAndRemove(id, function(){
+            res.send({status: 'removed'});
+          });
+        });
+      }
+    });
   });
   
   app.get(config.server_root+'/login', function(req, res) {
