@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 	
-	$('input[type="date"]').datepicker({
+	$('input[data-type="date"]').datepicker({
 		language: 'fi',
 		format: 'd.m.yyyy',
 		weekStart: 1
@@ -47,7 +47,7 @@
 			var element = $(e.target[i]);
 			if(element.is('input') || element.is('textarea') || element.is('select')){
 				if(element.attr('type') == 'checkbox'){
-					if(element.is(':checked')){
+					if(element.prop('checked')){
 						if(values.hasOwnProperty(element.attr('name'))){
 							values[element.attr('name')].push(element.val());
 						}else{
@@ -55,10 +55,10 @@
 						}
 					}
 				}else if(element.attr('type') == 'radio'){
-					if(element.is(':checked')){
+					if(element.prop('checked')){
 						values[element.attr('name')] = element.val();
 					}
-				}else if(element.attr('type') == 'date'){
+				}else if(element.attr('data-type') == 'date'){
 					if(typeof(element.val()) !== 'undefined' && element.val() !== ''){
 						values[element.attr('name')] = moment(element.val(), 'D.M.YYYY').toDate();
 					}	
