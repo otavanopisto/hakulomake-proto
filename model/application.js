@@ -33,7 +33,7 @@ var schema = new mongoose.Schema({
   previousExpericence: { type: String, required: true },
   itSkills: { type: String, required: true },
   previouslyEmployed: { type: Boolean, required: true },
-  whenEmployed: { type: Number},
+  whenEmployed: { type: String},
   allergies: {type: [String], default:[]},
   languages: {
 	  english: { type: String, enum: ['good', 'ok', 'bad'] },
