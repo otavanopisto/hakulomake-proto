@@ -29,7 +29,7 @@
 	
 	$('#applicationTable').DataTable();
 	
-	$('#applicationTable tr').click(function(e){
+	$(document).on('click', '#applicationTable tr', function(e){
 		var id = $(this).attr('data-application-id').replace(/"/g, '');
      window.open(SERVER_ROOT+'/application/'+id);
 	});
