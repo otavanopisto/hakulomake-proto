@@ -78,6 +78,7 @@ exports.createApplication = function(req, res){
   
   var errors = req.validationErrors();
   if (errors) {
+    console.log(errors);
     res.status(400).send(errors);
   } else {
                       
@@ -102,7 +103,7 @@ exports.createApplication = function(req, res){
       whenEmployed: req.body['whenEmployedInput'],
       allergies: typeof(req.body['allergiesInput']) !== 'undefined' ? req.body['allergiesInput'] : [],
       suitableWorkingPeriod: req.body['suitableWorkingPeriodInput'],
-      transportation: req.body['transportationInput'],
+      transportation: typeof(req.body['transportationInput']) !== 'undefined' ? req.body['transportationInput'] : [],
       additionalInfo: req.body['additionalInfoInput'],
       primaryRequest: req.body['primaryRequestInput'],
       secondaryRequest: req.body['secondaryRequestInput'],
@@ -132,6 +133,7 @@ exports.createApplication = function(req, res){
     
     application.save(function(err, application){
       if(err) {
+        console.log(err);
         res.status(400).send(err);
       }else{
         var content = 'Kesätyöhakemuksesi on vastaanotettu onnistuneesti.'
