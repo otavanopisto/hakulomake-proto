@@ -1,28 +1,37 @@
 {
-  "name": "sjApplication",
-  "version": "0.0.0",
-  "description": "",
+  "name": "hakulomake",
+  "version": "0.0.1",
+  "description": "Application that handles forms which are used to apply for school.",
   "main": "app.js",
-  "author": {
-    "name": "Belvain",
-    "email": ""
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otavanopisto/hakulomake.git"
+  },
+  "author": "Heikki Kurhinen <heikki.kurhinen@gmail.com> (http://elemmings.fi)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/otavanopisto/hakulomake/issues"
+  },
+  "homepage": "https://github.com/otavanopisto/hakulomake#readme",
   "dependencies": {
-    "express": "*",
-    "mongoose": "*",
-    "body-parser": "*",
-    "express-session": "*",
-    "cookie-parser": "*",
-    "jade": "*",
-    "underscore": "*",
-    "async": "*",
-    "express-validator": "*",
-    "mailgun-js": "*",
-    "connect-flash": "*",
-    "password-generator": "*",
-    "passport" : "*",
-    "passport-local" : "*",
-    "bcrypt-nodejs" : "*",
-    "multer": "*"
+    "async": "^1.5.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "express-validator": "^2.19.1",
+    "jade": "^1.11.0",
+    "mailgun-js": "^0.7.7",
+    "mongoose": "^4.4.5",
+    "multer": "^1.1.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "password-generator": "^2.0.2",
+    "underscore": "^1.8.3"
   }
 }
