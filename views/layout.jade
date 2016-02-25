@@ -6,7 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title Mikkelin kaupungin kesätyöhakemus
+    title Hakulomake
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css')
     link(rel='stylesheet', href=root+'/css/admin.css')
@@ -32,31 +32,16 @@ html(lang='en')
             br
             select#stateFilter.filter(name='state')
               option(value='') Kaikki
-              option(value='waiting', selected=query.state == 'waiting') Käsittelemättä
-              option(value='processing', selected=query.state == 'processing') Käsittelyssä
-              option(value='reserved', selected=query.state == 'reserved') Varattu
-              option(value='notified', selected=query.state == 'notified') Ilmoitettu
-              option(value='confirmed', selected=query.state == 'confirmed') Tulo varmistettu
-              option(value='contract', selected=query.state == 'contract') Työsopimus tehty
-              option(value='denied', selected=query.state == 'denied') Hylätty
           li
             span Ensisijainen toive:
             br
             select#primaryRequestFilter.filter(name='primary')
               option(value='') Kaikki
-              each department in positions
-                optgroup(label=department.department)
-                  each job in department.jobs
-                    option(value=job.code, selected=query.primaryRequest == job.code) #{job.name}
           li
             span Toissijainen toive:
             br
             select#secondaryRequestFilter.filter(name='secondary')
               option(value='') Kaikki
-              each department in positions
-                optgroup(label=department.department)
-                  each job in department.jobs
-                    option(value=job.code, selected=query.secondaryRequest == job.code) #{job.name}
           if (user.role === 'admin')
             li
               a(href=root+'/user/manage') Käyttäjähallinta
