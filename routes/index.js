@@ -43,7 +43,7 @@ module.exports = function(app){
    * Navigation
    */
    
-  app.get(config.server_root, function(req, res){
+  app.get(config.server_root+'/', function(req, res){
     res.render('form', {positions: config.positions, root: config.server_root});
   });
   
