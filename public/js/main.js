@@ -19,6 +19,13 @@
     })
   });
   
+  $('#birthdayInput').change(function(){
+    var now = moment();
+    var birthday = moment($(this).text(), 'D.M.YYYY');
+    var age = moment.duration(now.valueOf() - birthday.valueOf()).years();
+    console.log(age);
+  });
+  
   $('#appendixInput').fileupload({
       dataType: 'json',
       done: function (e, data) {

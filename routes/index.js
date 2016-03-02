@@ -8,6 +8,14 @@ var upload = multer({ dest: 'uploads/' })
 var async = require('async');
 var path = require('path');
 var fs = require('fs');
+var PyramusClient = require('../services/pyramusClient');
+var pyramusClient = new PyramusClient({
+  appId: '8df25fa7-2d34-4f0a-8c35-8e60aa753927',
+  appSecret: 'aeVt7LUBNcW74Ziji2AfX2ZVFXaATCftl0FpwTMnsEzV6etXtRLFu9hmXarN0i3gC5Gg2MphYnppVAnG',
+  pyramusUrl: 'https://dev.pyramus.fi:8443/1/',
+  redirectURI: 'http://localhost:3000/auth_code',
+  authCode: 'f2f34423cc39021acc6ec884ae935a78'
+});
 
 function authenticate(allowedRoles) {
   return function(req, res, next) {
@@ -42,9 +50,33 @@ module.exports = function(app){
   /*
    * Navigation
    */
-   
+  
   app.get(config.server_root+'/', function(req, res){
-    res.render('form', {positions: config.positions, root: config.server_root});
+    pyramusClient.getNationalities(function(err, nationalities){
+      if(err){
+        res.status(500).send(err);
+      }else{
+        pyramusClient.getLanguages(function(err, languages){
+          if(err){
+            res.status(500).send(err);
+          }else{
+            pyramusClient.getMunicipalities(function(err, municipalities){
+              if(err){
+                res.status(500).send(err);
+              }else{
+                res.render('form', {
+                  nationalities: nationalities,
+                   languages: languages,
+                   municipalities: municipalities,
+                   root: config.server_root
+                });
+              }
+            })
+          }
+        });
+      }
+    });
+    
   });
   
   app.post(config.server_root+'/upload', upload.array('appendix'), function (req, res, next) {
