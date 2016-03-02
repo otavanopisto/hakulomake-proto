@@ -6,7 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title Mikkelin kaupungin kesätyöhakemus
+    title Hae opiskelijaksi nettilukioon
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css')
     link(rel='stylesheet', href=root+'/css/jquery.fileupload.css')
@@ -16,30 +16,187 @@ html(lang='en')
       | var SERVER_ROOT = "#{root}"; 
   body
     .container
+      h3 Hae Nettilukioon
+      br
+      br
       .row
-        .col-md-4
-        .col-md-4
+      .col-lg-2
+      .col-lg-8
+        form#main-form.form-horizontal
+          h4 Henkilötiedot
           br
-         h3 Hakulomake
-        .col-md-4
-      form.form-horizontal#main-form
-        fieldset
+          .form-group
+            label.control-label.col-lg-2(for='lastnameInput') Sukunimi:
+            .col-lg-3
+              input#lasnameInput.form-control.input-sm(name='lastnameInput', placeholder='sukunimi', required='required', type='text')
+            label.control-label.col-lg-2(for='firstnameInput') Etunimet:
+            .col-lg-5
+              input#firstnameInput.form-control.input-sm(name='firstnameInput', placeholder='etunimet', required='required', type='text')
+          .form-group
+            label.control-label.col-lg-2(for='birthdayInput') Syntymäaika:
+            .col-lg-3
+              input#birthdayInput.form-control.input-sm(name='birthdayInput', placeholder='syntymäaika', required='required', type='text', data-type='date')
+              span.help-block Esitysmuoto: 29.02.2016
+            label.control-label.col-lg-2(for='ssnInput') HETU loppuosa: 
+            .col-lg-2
+              input#ssnInput.form-control.input-sm(name='ssnInput', placeholder='henkilötunnuksen loppuosa', required='required', type='text')
+              span.help-block Esitysmuoto: XXXX
+            label.control-label.col-lg-1(for='sexInput') Suku- puoli: 
+            .col-lg-2
+              select#sexInput.form-control.input-sm(name='sexInput', required='required')
+                option(value='') valitse...
+                option(value='male') Mies
+                option(value='female') Nainen
+          .form-group
+            label.control-label.col-lg-2(for='addressInput') Lähiosoite:
+            .col-lg-10
+              input#addressInput.form-control.input-sm(name='addressInput', placeholder='Lähiosoite', required='required', type='text')
+          .form-group
+            label.control-label.col-lg-2(for='zipcodeInput') Postinumero:
+            .col-lg-4
+              input#zipcodeInput.form-control.input-sm(name='zipcodeInput', placeholder='Postinumero', required='required', type='text', pattern='[0-9]{5}')
+            label.control-label.col-lg-2(for='cityInput') Postitoimipaikka:
+            .col-lg-4
+              input#cityInput.form-control.input-sm(name='cityInput', placeholder='Postitoimipaikka', required='required', type='text')
+          .form-group
+            label.control-label.col-lg-2(for='countryInput') Maa:
+            .col-lg-10
+              input#countryInput.form-control.input-sm(name='countryInput', placeholder='maa', required='required', type='text')
+          .form-group
+            label.control-label.col-lg-2(for='municipalityInput') Kotikunta:
+            .col-lg-10
+              select#municipalityInput.form-control.input-sm(name='countryInput', required='required')
+                option(value='') Valitse...
+                each municipality in municipalities
+                  option(value=municipality.code) #{municipality.name}
+          .form-group
+            label.control-label.col-lg-2(for='nationalityInput') Kansalaisuus:
+            .col-lg-10
+              select#nationalityInput.form-control.input-sm(name='nationalityInput', required='required')
+                option(value='') Valitse...
+                each nationality in nationalities
+                  option(value=nationality.code) #{nationality.name}
+          .form-group
+            label.control-label.col-lg-2(for='languageInput') Äidinkieli:
+            .col-lg-10
+              select#languageInput.form-control.input-sm(name='languageInput', required='required')
+                option(value='') Valitse...
+                each language in languages
+                  option(value=language.code) #{language.name}
+          .form-group
+            label.control-label.col-lg-2(for='phoneInput') Puhelinnumero:
+            .col-lg-10
+              input#phoneInput.form-control.input-sm(name='phoneInput', placeholder='puhelinnumero', required='required', type='text')
+              span.help-block Laita mukaan myös maakoodi, jos olet ulkomailla.
+          .form-group
+            label.control-label.col-lg-3(for='emailInput') Sähköpostiosoite:
+            .col-lg-9
+              input#emailInput.form-control.input-sm(name='emailInput', placeholder='sähköpostiosoite', required='required', type='email')
+          .form-group
+            label.control-label.col-lg-3(for='repeatEmailInput') Sähköpostiosoite uudestaan:
+            .col-lg-9
+              input#repeatEmailInput.form-control.input-sm(name='repeatEmailInput', placeholder='sähköpostiosoite', required='required', type='email')
+          hr
+          .parentInfo
+            h4 Huoltajan tiedot ja alaikäisen hakemusperusteet
+            br
+            .form-group
+              label.control-label(for='minorExplanationInput') Alaikäisen hakemusperusteet
+              textarea#minorExplanationInput.form-control.input-sm(name='minorExplanationInput', required='required')
+            h4 Huoltajan tiedot
+            br
+            .form-group
+              label.control-label.col-lg-2(for='parentLastnameInput') Sukunimi:
+              .col-lg-3
+                input#parentLastnameInput.form-control.input-sm(name='parentLastnameInput', placeholder='sukunimi', required='required', type='text')
+              label.control-label.col-lg-2(for='parentFirstnameInput') Etunimi:
+              .col-lg-5
+                input#parentFirstnameInput.form-control.input-sm(name='parentFirstnameInput', placeholder='etunimet', required='required', type='text')
+            .form-group
+              label.control-label.col-lg-2(for='parentAddressInput') Lähiosoite:
+              .col-lg-10
+                input#parentAddressInput.form-control.input-sm(name='parentAddressInput', placeholder='Lähiosoite', required='required', type='text')
+            .form-group
+              label.control-label.col-lg-2(for='parentZipcodeInput') Postinumero:
+              .col-lg-4
+                input#parentZipcodeInput.form-control.input-sm(name='parentZipcodeInput', placeholder='Postinumero', required='required', type='text', pattern='[0-9]{5}')
+              label.control-label.col-lg-2(for='parentCityInput') Postitoimipaikka:
+              .col-lg-4
+                input#parentCityInput.form-control.input-sm(name='parentCityInput', placeholder='Postitoimipaikka', required='required', type='text')
+            .form-group
+              label.control-label.col-lg-2(for='parentCountryInput') Maa:
+              .col-lg-10
+                input#parentCountryInput.form-control.input-sm(name='parentCountryInput', placeholder='maa', required='required', type='text')
+            hr
+          h4 Muut tiedot
           br
+          .form-group
+            label.control-label.col-lg-6(for='currentlyStudyingInput') Opiskelen tällä hetkellä toisessa oppilaitoksessa:
+            .col-lg-6
+              select#currentlyStudyingInput.form-control.input-sm(name='currentlyStudyingInput', required='required')
+                option(value='') Valitse...
+                option(value='1') Kyllä
+                option(value='0') En
+          .form-group
+            label.control-label.col-lg-4(for='currentSchoolInput') Missä oppilaitoksessa olet:
+            .col-lg-8
+              input#currentSchoolInput.form-control.input-sm(name='currentSchoolInput', required='required', type='text')
+          .form-group
+            label.control-label.col-lg-3(for='studyGoalInput') Opiskelutavoitteet:
+            .col-lg-9
+              select#studyGoalInput.form-control.input-sm(name='studyGoalInput', required='required')
+                option(value='') Valitse...
+                option(value='Lukion päättötodistus') Lukion päättötodistus
+                option(value='YO-tutkinto') YO-tutkinto
+                option(value='Molemmat') Molemmat
+          .form-group
+            label.control-label.col-lg-3(for='currentActivityInput') Olen tällä hetkellä:
+            .col-lg-9
+              select#currentActivityInput.form-control.input-sm(name='currentActivityInput', required='required')
+                option(value='') Valitse...
+                option(value='1') Työllinen
+                option(value='2') Työtön
+                option(value='3') Opiskelija
+                option(value='4') Eläkeläinen
+                option(value='5') Muu      
+          .form-group.additionalActivityInputContainer
+            label.control-label.col-lg-3(for='additionalActivityInput') Kerro tarkemmin:
+            .col-lg-9
+              input#additionalActivityInput.form-control.input-sm(name='additionalActivityInput', required='required', type='text')
+          .form-group
+            label.control-label(for='additionalInfoInput') Haluan kertoa itsestäni…
+            textarea#additionalInfoInput.form-control.input-sm(name='additionalInfoInput')
+          hr
+          h4 Aiemmat opinnot
           br
-          // Text input
           .form-group
-            label.col-md-4.control-label(for='firstnameInput') Etunimi
-            .col-md-4
-              input#firstnameInput.form-control.input-md(name='firstnameInput', placeholder='etunimi', required='', type='text')
-          // Text input
+            label.control-label.col-lg-3(for='previousStudiesInput') Aiemmat opinnot:
+            .col-lg-9
+              select#previousStudiesInput.form-control.input-sm(name='previousStudiesInput', required='required')
+                option(value='') Valitse...
+                option(value='Peruskoulu') Peruskoulu
+                option(value='Kansakoulu') Kansakoulu
+                option(value='Lukio (keskeytynyt)') Lukio (keskeytynyt)
+                option(value='Ammatillinen 2.aste') Ammatillinen 2. aste
+                option(value='Korkeakoulu') Korkeakoulu
+                option(value='Muu') Muu
+          .prevCollegeInfoContainer
+            .form-group
+              label.col-lg-3.control-label(for='previousCollegeInput') Oppilaitos
+              .col-lg-9
+                input#previousCollegeInput.form-control.input-sm(name='previousCollegeInput', required='required', type='text')
+            .form-group
+              label.col-lg-3.control-label(for='previousCollegeDurationInput') Opintojen kesto
+              .col-lg-9
+                input#previousCollegeDurationInput.form-control.input-sm(name='previousCollegeDurationInput', required='required', type='text')
+          .form-group.additionalPrevStudyContainer
+            label.col-lg-3.control-label(for='additionalPrevStudyInfoInput') Kerro tarkemmin:
+            .col-lg-9
+              input#additionalPrevStudyInfoInput.form-control.input-sm(name='additionalPrevStudyInfoInput', required='required', type='text')
           .form-group
-            label.col-md-4.control-label(for='lastnameInput') Sukunimi
-            .col-md-4
-              input#lasnameInput.form-control.input-md(name='lastnameInput', placeholder='sukunimi', required='', type='text')
-          .form-group
-            label.col-md-4.control-label
-              | Liitteet: (max. 50M)
-            .col-md-4
+            label.control-label.col-lg-3
+              | Todistusjäljennökset: (max. 50M)
+            .col-lg-9
               span.btn.btn-success.fileinput-button
                 i.glyphicon.glyphicon-plus
                 span &nbsp;valitse liite...
@@ -49,12 +206,50 @@ html(lang='en')
               #progress.progress
                 .progress-bar.progress-bar-success
               #files.files
+            span.help-block Voit toimittaa todistusjäljennökset myös sähköpostin liitetiedostona riikka.lehtonen@otavanopisto.fi tai postitse (Otavan Opisto / nettilukio, Otavantie 2 B, 50670, Otava)
+          hr
+          h4 Mistä sait tiedon koulutuksesta
+          br
           .form-group
-            label.col-md-4.control-label(for='submitAssigmentBtn')
-            .col-md-4
+            span.help-block Valitse ainakin yksi...
+            .checkbox
+              label
+                input(type='checkbox')
+                | Lehti-ilmoituksesta
+            .checkbox
+              label
+                input(type='checkbox')
+                | Lehtiartikkelista
+            .checkbox
+              label
+                input(type='checkbox')
+                | Internetistä
+            .checkbox
+              label
+                input(type='checkbox')
+                | Suoramainonnasta
+            .checkbox
+              label
+                input(type='checkbox')
+                | Radiosta
+            .checkbox
+              label
+                input(type='checkbox')
+                | Televisiosta
+            .checkbox
+              label
+                input(type='checkbox')
+                | Muu
+          .form-group
+            label.col-lg-3.control-label(for='infoAboutEducationInput') Kerro tarkemmin:
+            .col-lg-9
+              input#infoAboutEducationInput.form-control.input-sm(name='infoAboutEducationInput', required='required', type='text')
+          .form-group
+            label.col-lg-4.control-label(for='submitAssigmentBtn')
+            .col-lg-4
               img#loader-img(src=root+'/img/ajax-loader.gif', style='display:none;')
               button#submitAssigmentBtn.btn.btn-lg.btn-primary.pull-right(name='submitAssigmentBtn') Lähetä
-
+      .col-lg-2
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
