@@ -31,6 +31,18 @@ select:required:valid {
 .parentInfo {
   display: none;
 }
+.currentSchoolContainer{
+  display: none;
+}
+.additionalActivityInputContainer{
+  display: none;
+}
+.prevCollegeInfoContainer{
+  display: none;
+}
+.additionalPrevStudyContainer{
+  display: none;
+}
 .error-container {
   color:red;
 }

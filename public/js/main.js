@@ -20,10 +20,43 @@
   });
   
   $('#birthdayInput').change(function(){
-    var now = moment();
-    var birthday = moment($(this).text(), 'D.M.YYYY');
-    var age = moment.duration(now.valueOf() - birthday.valueOf()).years();
-    console.log(age);
+    var now = moment().valueOf();
+    var birthday = moment($(this).val(), 'D.M.YYYY').valueOf();
+    var age = moment.duration(now - birthday).years();
+    if(age < 18){
+      $('.parentInfo').show(); 
+    }else{
+      $('.parentInfo').hide();
+    }
+  });
+  
+  $('#currentlyStudyingInput').change(function(){
+    if($(this).val() == '1'){
+      $('.currentSchoolContainer').show();
+    }else{
+      $('.currentSchoolContainer').hide();
+    }
+  });
+  
+  $('#currentActivityInput').change(function(){
+    if($(this).val() == '5'){
+      $('.additionalActivityInputContainer').show();
+    }else{
+      $('.additionalActivityInputContainer').hide();
+    }
+  });
+  
+  $('#previousStudiesInput').change(function(){
+    if($(this).val() == 'Lukio (keskeytynyt)'){
+      $('.prevCollegeInfoContainer').show();
+      $('.additionalPrevStudyContainer').hide();
+    }else if($(this).val() == 'Muu'){
+      $('.prevCollegeInfoContainer').hide();
+      $('.additionalPrevStudyContainer').show();
+    }else{
+      $('.prevCollegeInfoContainer').hide();
+      $('.additionalPrevStudyContainer').hide();
+    }
   });
   
   $('#appendixInput').fileupload({
