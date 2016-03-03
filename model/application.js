@@ -1,53 +1,50 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-  // Fields for application handler
-  state: { type: String, default:'waiting', enum: ['waiting', 'processing', 'reserved', 'notified', 'confirmed', 'contract', 'denied'] },
-  organizationalUnit: {type: String},
-  job: {type: String},
-  bossTitle: {type: String},
-  bossName: {type: String},
-  workingHours: {type: Number},
-  salary: {type: Number},
-  startDate: {type: Date},
-  endDate: {type: Date},
-  ssn: {type: String},
-  bankAccont: {type: String},
-  info: {type: String},
-  // Fields for applicant
   added: {type: Number, default: Date.now },
-  firstName : { type: String, required: true },
   lastName : { type: String, required: true },
+  firstName : { type: String, required: true },
+  birthday: { type: Date, required: true },
+  ssn: {type: String, required: true},
+  sex: { type: String, required: true, enum: ['male', 'female'] },
   address: { type: String, required: true },
   zipcode: { type: Number, required: true },
-  city: { type: String, required: true },
-  phone: { type: Number, required: true },
-  birthday: { type: Date, required: true },
-  sex: { type: String, required: true, enum: ['male', 'female'] },
-  email: { type: String, required: true },
-  placeOfBirth: { type: String, required: true },
-  home: { type: String, required: true },
-  driversLicence: {type:[String], default: []},
-  driversLicenceYear: Number,
-  education: { type: String, required: true },
-  previousExpericence: { type: String, required: true },
-  itSkills: { type: String, required: true },
-  previouslyEmployed: { type: Boolean, required: true },
-  whenEmployed: { type: String},
-  allergies: {type: [String], default:[]},
-  languages: {
-	  english: { type: String, enum: ['good', 'ok', 'bad'] },
-	  swedish: { type: String, enum: ['good', 'ok', 'bad'] },
-	  german: { type: String, enum: ['good', 'ok', 'bad'] }
+  city: { type: String, required: true },  
+  country: {type: String, required: true},
+  municipality: {
+    name: {type: String, required: true},
+    code: {type: Number, required: true}
   },
-  suitableWorkingPeriod: {type: [String], default: []},
-  transportation: {type: [String], default:[]},
-  additionalInfo: { type: String, required: true },
-  primaryRequest: { type: String, required: true },
-  secondaryRequest: { type: String, required: true },
-  othersOk: { type: Boolean, required: true },
-  basicDirectorCourses: String,
-  fieldDirectorCourses: String,
+  nationality: {
+    name: {type: String, required: true},
+    code: {type: Number, required: true}
+  },
+  language: {
+    name: {type: String, required: true},
+    code: {type: String, required: true}
+  },
+  phone: { type: Number, required: true },
+  email: { type: String, required: true },
+  parent: {
+    argumentForMinor: { type: String },
+    lastName: {type: String},
+    firstName: {type: String},
+    address: {type: String},
+    zipcode: {type: Number},
+    city: {type: String},
+    country: {type: String}
+  },
+  currentlyStudying: {type: Boolean, required: true},
+  currentSchool: {type: String},
+  studyGoal: {type: String, required: true},
+  previousStudies: {type: String, required: true},
+  previousStudiesInfo: {type: String},
+  previousCollege: {
+    collegeName: {type: String},
+    collegeDuration: {type: String}
+  },
+  heardFrom : [String],
+  heardFromInfo: {type: String},
   appendices: [String]
 });
 
