@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
   sex: { type: String, required: true, enum: ['male', 'female'] },
   address: { type: String, required: true },
   zipcode: { type: Number, required: true },
-  city: { type: String, required: true },  
+  city: { type: String, required: true },
   country: {type: String, required: true},
   municipality: {type: String, required: true},
   nationality: {type: String, required: true},
