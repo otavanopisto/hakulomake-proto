@@ -28,7 +28,7 @@ html(lang='en')
           .form-group
             label.control-label.col-lg-2(for='lastnameInput') Sukunimi:
             .col-lg-3
-              input#lasnameInput.form-control.input-sm(name='lastnameInput', placeholder='sukunimi', required='required', type='text')
+              input#lastnameInput.form-control.input-sm(name='lastnameInput', placeholder='sukunimi', required='required', type='text')
             label.control-label.col-lg-2(for='firstnameInput') Etunimet:
             .col-lg-5
               input#firstnameInput.form-control.input-sm(name='firstnameInput', placeholder='etunimet', required='required', type='text')
@@ -214,36 +214,36 @@ html(lang='en')
             span.help-block Valitse ainakin yksi...
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Lehti-ilmoituksesta
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Lehtiartikkelista
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Internetistä
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Suoramainonnasta
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Radiosta
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Televisiosta
             .checkbox
               label
-                input(type='checkbox')
+                input(type='checkbox', name='heardFromInput')
                 | Muu
           .form-group
-            label.col-lg-3.control-label(for='infoAboutEducationInput') Kerro tarkemmin:
+            label.col-lg-3.control-label(for='heardFromInfoInput') Kerro tarkemmin:
             .col-lg-9
-              input#infoAboutEducationInput.form-control.input-sm(name='infoAboutEducationInput', required='required', type='text')
+              input#heardFromInfoInput.form-control.input-sm(name='heardFromInfoInput', type='text')
           .form-group
             label.col-lg-4.control-label(for='submitAssigmentBtn')
             .col-lg-4
