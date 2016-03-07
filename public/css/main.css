@@ -28,21 +28,15 @@ select:required:valid {
   background-position: right center;
   background-repeat: no-repeat;
 }
-.parentInfo {
+
+.parentInfo,
+.currentSchoolContainer,
+.additionalActivityInputContainer,
+.prevCollegeInfoContainer,
+.additionalPrevStudyContainer {
   display: none;
 }
-.currentSchoolContainer{
-  display: none;
-}
-.additionalActivityInputContainer{
-  display: none;
-}
-.prevCollegeInfoContainer{
-  display: none;
-}
-.additionalPrevStudyContainer{
-  display: none;
-}
+
 .error-container {
   color:red;
 }
