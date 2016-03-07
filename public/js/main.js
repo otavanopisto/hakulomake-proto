@@ -148,30 +148,4 @@
 		});
 	});
 	
-	$('input[name="driversLicenceInput"]').change(function(e){
-		var anyChecked = false;
-		$('input[name="driversLicenceInput"]').each(function(e){
-			if($(this).is(':checked')){
-				anyChecked = true;
-			}
-		});
-		if(anyChecked){
-			$('input[name="driverslicenceyearInput"]').removeAttr('disabled');
-			$('input[name="driverslicenceyearInput"]').attr('required', '');
-		}else{
-			$('input[name="driverslicenceyearInput"]').removeAttr('required');
-			$('input[name="driverslicenceyearInput"]').attr('disabled', '');
-		}
-	});
-	
-	$('#previouslyEmployedInput-1').change(function(e){
-		$('input[name="whenEmployedInput"]').removeAttr('disabled');
-		$('input[name="whenEmployedInput"]').attr('required', '');
-	});
-	
-	$('#previouslyEmployedInput-0').change(function(e){
-		$('input[name="whenEmployedInput"]').removeAttr('required');
-		$('input[name="whenEmployedInput"]').attr('disabled', '');
-	});
-	
 })();
