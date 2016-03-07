@@ -9,6 +9,6 @@ module.exports = {
   },
   database: {
     host: 'localhost',
-    table: 'sjapplication'
+    table: 'hakulomake'
   }
 };
