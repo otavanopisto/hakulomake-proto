@@ -65,7 +65,7 @@ html(lang='en')
           .form-group
             label.control-label.col-lg-2(for='municipalityInput') Kotikunta:
             .col-lg-10
-              select#municipalityInput.form-control.input-sm(name='countryInput', required='required')
+              select#municipalityInput.form-control.input-sm(name='municipalityInput', required='required')
                 option(value='') Valitse...
                 each municipality in municipalities
                   option(value=municipality.code) #{municipality.name}
@@ -102,31 +102,31 @@ html(lang='en')
             br
             .form-group
               label.control-label(for='minorExplanationInput') Alaikäisen hakemusperusteet
-              textarea#minorExplanationInput.form-control.input-sm(name='minorExplanationInput', required='required')
+              textarea#minorExplanationInput.form-control.input-sm(name='minorExplanationInput')
             h4 Huoltajan tiedot
             br
             .form-group
               label.control-label.col-lg-2(for='parentLastnameInput') Sukunimi:
               .col-lg-3
-                input#parentLastnameInput.form-control.input-sm(name='parentLastnameInput', placeholder='sukunimi', required='required', type='text')
+                input#parentLastnameInput.form-control.input-sm(name='parentLastnameInput', placeholder='sukunimi', type='text')
               label.control-label.col-lg-2(for='parentFirstnameInput') Etunimi:
               .col-lg-5
-                input#parentFirstnameInput.form-control.input-sm(name='parentFirstnameInput', placeholder='etunimet', required='required', type='text')
+                input#parentFirstnameInput.form-control.input-sm(name='parentFirstnameInput', placeholder='etunimet', type='text')
             .form-group
               label.control-label.col-lg-2(for='parentAddressInput') Lähiosoite:
               .col-lg-10
-                input#parentAddressInput.form-control.input-sm(name='parentAddressInput', placeholder='Lähiosoite', required='required', type='text')
+                input#parentAddressInput.form-control.input-sm(name='parentAddressInput', placeholder='Lähiosoite', type='text')
             .form-group
               label.control-label.col-lg-2(for='parentZipcodeInput') Postinumero:
               .col-lg-4
-                input#parentZipcodeInput.form-control.input-sm(name='parentZipcodeInput', placeholder='Postinumero', required='required', type='text', pattern='[0-9]{5}')
+                input#parentZipcodeInput.form-control.input-sm(name='parentZipcodeInput', placeholder='Postinumero', type='text', pattern='[0-9]{5}')
               label.control-label.col-lg-2(for='parentCityInput') Postitoimipaikka:
               .col-lg-4
-                input#parentCityInput.form-control.input-sm(name='parentCityInput', placeholder='Postitoimipaikka', required='required', type='text')
+                input#parentCityInput.form-control.input-sm(name='parentCityInput', placeholder='Postitoimipaikka', type='text')
             .form-group
               label.control-label.col-lg-2(for='parentCountryInput') Maa:
               .col-lg-10
-                input#parentCountryInput.form-control.input-sm(name='parentCountryInput', placeholder='maa', required='required', type='text')
+                input#parentCountryInput.form-control.input-sm(name='parentCountryInput', placeholder='maa', type='text')
             hr
           h4 Muut tiedot
           br
@@ -162,7 +162,7 @@ html(lang='en')
           .form-group.additionalActivityInputContainer
             label.control-label.col-lg-3(for='additionalActivityInput') Kerro tarkemmin:
             .col-lg-9
-              input#additionalActivityInput.form-control.input-sm(name='additionalActivityInput', required='required', type='text')
+              input#additionalActivityInput.form-control.input-sm(name='additionalActivityInput', type='text')
           .form-group
             label.control-label(for='additionalInfoInput') Haluan kertoa itsestäni…
             textarea#additionalInfoInput.form-control.input-sm(name='additionalInfoInput')
@@ -184,15 +184,15 @@ html(lang='en')
             .form-group
               label.col-lg-3.control-label(for='previousCollegeInput') Oppilaitos
               .col-lg-9
-                input#previousCollegeInput.form-control.input-sm(name='previousCollegeInput', required='required', type='text')
+                input#previousCollegeInput.form-control.input-sm(name='previousCollegeInput', type='text')
             .form-group
               label.col-lg-3.control-label(for='previousCollegeDurationInput') Opintojen kesto
               .col-lg-9
-                input#previousCollegeDurationInput.form-control.input-sm(name='previousCollegeDurationInput', required='required', type='text')
+                input#previousCollegeDurationInput.form-control.input-sm(name='previousCollegeDurationInput', type='text')
           .form-group.additionalPrevStudyContainer
             label.col-lg-3.control-label(for='additionalPrevStudyInfoInput') Kerro tarkemmin:
             .col-lg-9
-              input#additionalPrevStudyInfoInput.form-control.input-sm(name='additionalPrevStudyInfoInput', required='required', type='text')
+              input#additionalPrevStudyInfoInput.form-control.input-sm(name='additionalPrevStudyInfoInput', type='text')
           .form-group
             label.control-label.col-lg-3
               | Todistusjäljennökset: (max. 50M)
