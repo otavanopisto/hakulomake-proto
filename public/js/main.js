@@ -141,9 +141,13 @@
 			for(var i = 0; i < errors.length;i++){
 				var error = errors[i];
 				if(typeof(error.param) !== 'undefined'){
-					$('label[for="'+error.param+'"]').after('<span class="error-container">'+error.msg+'</span>');
+			    $('*[name="'+error.param+'"]').after('<span class="error-container">'+error.msg+'</span>');
 				}
 			}
+      $('.error-container').first().prev()[0].scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+      });
 			$('#loader-img').hide();
 		});
 	});
