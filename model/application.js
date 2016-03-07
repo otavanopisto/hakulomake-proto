@@ -11,18 +11,9 @@ var schema = new mongoose.Schema({
   zipcode: { type: Number, required: true },
   city: { type: String, required: true },  
   country: {type: String, required: true},
-  municipality: {
-    name: {type: String, required: true},
-    code: {type: Number, required: true}
-  },
-  nationality: {
-    name: {type: String, required: true},
-    code: {type: Number, required: true}
-  },
-  language: {
-    name: {type: String, required: true},
-    code: {type: String, required: true}
-  },
+  municipality: {type: String, required: true},
+  nationality: {type: String, required: true},
+  language: {type: String, required: true},
   phone: { type: Number, required: true },
   email: { type: String, required: true },
   parent: {
