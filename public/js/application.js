@@ -1,32 +1,11 @@
 (function(){
 	'use strict';
-	
-  var fieldSaveTimer;
-  
+
   $('input[type="date"]').datepicker({
 		language: 'fi',
 		format: 'd.m.yyyy',
 		weekStart: 1
 	});
-  
-	var sexCode = $('#applicant-sex').text() == 'male' ? 'Mies' : 'Nainen';
-	$('#applicant-sex').text(sexCode);
-	
-	var birthday = moment($('#applicant-birthday').text());
-	$('#applicant-birthday').text(birthday.format('D.M.YYYY'));
-	
-  var startDate = moment($('#startDateInput').val()).format('D.M.YYYY');
-  if(startDate !== 'Invalid date'){
-    $('#startDateInput').val(startDate);
-  }
-
-  var endDate = moment($('#endDateInput').val()).format('D.M.YYYY');
-  if(endDate !== 'Invalid date'){
-	 $('#endDateInput').val(endDate);
-  }
-  
-	var added = moment($('#application-added').data('data-added'));
-	$('#application-added').text(added.format('D.M.YYYY'));
   
   function updateApplication(){
     var data = getValues();
@@ -34,7 +13,7 @@
 		$('#loader-img').show();
 		$.post(SERVER_ROOT+'/update', {id: id, data: data}, function(res){
 			noty({
-			    text: 'Hakemuksen tila päivitetty onnistuneesti.',
+			  text: 'Hakemuksen tila päivitetty onnistuneesti.',
 				type: 'success',
 				timeout: 3000,
 			    animation: {
@@ -45,7 +24,7 @@
 			$('#loader-img').hide();
 		}).fail(function(err){
 			noty({
-			    text: 'Tilan päivitys epäonnistui, yritä myöhemmin uudelleen.',
+			  text: 'Tilan päivitys epäonnistui, yritä myöhemmin uudelleen.',
 				type: 'error',
 			    timeout: 3000,
 				animation: {
@@ -59,50 +38,53 @@
   
   function getValues(){
     var application = {};
-    $('.staff-fields textarea').each(function(){
-        application[$(this).attr('name')] = $(this).val();
-    });
-    $('.staff-fields select').each(function(){
-        application[$(this).attr('name')] = $(this).val();
-    });
-    $('.staff-fields input[type="text"]').each(function(){
-        application[$(this).attr('name')] = $(this).val();
-    });
-    $('.staff-fields input[type="date"]').each(function(){
-      if($(this).val() !== ''){
-        application[$(this).attr('name')] = moment($(this).val(), 'D.M.YYYY').toDate();
-      }
-    });
-
     application.state = $('input[name="state"]:checked').length > 0 ? $('input[name="state"]:checked').val() : '';
-    
     return application;
   }
-	
-  $('.staff-fields input[type="text"]').keyup(function(){
-    clearTimeout(fieldSaveTimer);
-    fieldSaveTimer = setTimeout(function(){
-      updateApplication();
-    }, 1500);
-  });
-  
-  $('.staff-fields textarea').keyup(function(){
-    clearTimeout(fieldSaveTimer);
-    fieldSaveTimer = setTimeout(function(){
-      updateApplication();
-    }, 1500);
-  });
-  
-  $('.staff-fields select').change(function(){
-    updateApplication();
-  });
   
 	$('input[name="state"]').change(function(){
     updateApplication();
 	});
-	
-  $('.staff-fields input[type="date"]').change(function(){
-    updateApplication();
+  
+  $('#add-comment-btn').click(function(){
+    var commentText = $('#new-comment-input').val();
+    if(typeof(commentText) !== 'undefined' && commentText !== ''){
+      $.post(SERVER_ROOT+'/comment',{
+        text: commentText,
+        application: $('#applicationId').val()
+      }, function(res){
+        noty({
+  			  text: 'Merkintä lisätty onnistuneesti.',
+  				type: 'success',
+  				timeout: 3000,
+  			    animation: {
+  			        open: 'animated fadeIn',
+  			        close: 'animated fadeOut',
+  			    }
+  			});
+        var newComment = $('<div/>')
+          .addClass('panel panel-info')
+          .append($('<div/>')
+            .addClass('panel-heading')
+            .text(res.user+' '+res.added))
+          .append($('<div/>')
+            .addClass('panel-body')
+            .text(res.text));
+            
+          $('.comment-list').prepend(newComment);
+ 
+      }).fail(function(err){
+        noty({
+  			  text: 'Merkinnän lisääminen epäonnistui, yritä myöhemmin uudelleen.',
+  				type: 'error',
+  			    timeout: 3000,
+  				animation: {
+  			        open: 'animated fadeIn',
+  			        close: 'animated fadeOut',
+  			    }
+  			});
+      });
+    }
   });
   
 })();
