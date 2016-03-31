@@ -14,7 +14,7 @@ var schema = new mongoose.Schema({
   municipality: {type: String, required: true},
   nationality: {type: String, required: true},
   language: {type: String, required: true},
-  phone: { type: Number, required: true },
+  phone: { type: String, required: true },
   email: { type: String, required: true },
   parent: {
     argumentForMinor: { type: String },
