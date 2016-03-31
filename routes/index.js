@@ -1,6 +1,7 @@
 var application = require('./components/application');
 var admin = require('./components/admin');
 var user = require('./components/user');
+var comment = require('./components/comment');
 var config = require('../config');
 var multer  = require('multer');
 var Appendix = require('../model/appendix');
@@ -151,6 +152,11 @@ module.exports = function(app){
   app.post(config.server_root+'/application', application.createApplication);
   app.post(config.server_root+'/update', authenticate(['manager', 'admin']), application.updateApplication);
   app.get(config.server_root+'/application/:id', authenticate(['manager', 'admin']), application.getApplication);
+  
+  /*
+   * Comments
+   */
+  app.post(config.server_root+'/comment', authenticate(['admin']), comment.create);
   
   /*
    *  Admin
