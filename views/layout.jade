@@ -32,16 +32,14 @@ html(lang='en')
             br
             select#stateFilter.filter(name='state')
               option(value='') Kaikki
-          li
-            span Ensisijainen toive:
-            br
-            select#primaryRequestFilter.filter(name='primary')
-              option(value='') Kaikki
-          li
-            span Toissijainen toive:
-            br
-            select#secondaryRequestFilter.filter(name='secondary')
-              option(value='') Kaikki
+              option(value='APPLIED', selected=query.state == 'APPLIED') Vastaanotettu
+              option(value='INPROGRESS', selected=query.state == 'INPROGRESS') Otettu käsittelyyn
+              option(value='WAITING_OFFICIAL_APPROVAL', selected=query.state == 'WAITING_OFFICIAL_APPROVAL') Odottaa virallista hyväksyntää
+              option(value='APPROVAL_SIGNED', selected=query.state == 'APPROVAL_SIGNED') Hyväksyntä allekirjoitettu
+              option(value='WAITING', selected=query.state == 'WAITING') Odottaa
+              option(value='RECEIVED', selected=query.state == 'RECEIVED') Paikka vastaanotettu
+              option(value='APPROVED', selected=query.state == 'APPROVED') Hyväksytty
+              option(value='REJECTED', selected=query.state == 'REJECTED') Hylätty
           if (user.role === 'admin')
             li
               a(href=root+'/user/manage') Käyttäjähallinta
