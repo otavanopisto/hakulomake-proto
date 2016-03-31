@@ -10,16 +10,17 @@ block content
         table#applicationTable
           thead
             tr
-              th Nimi
-              th Osoite
-              th Puhelin
-              th Email
+              th Sukunimi
+              th Etunimet
+              th Sähköposti
+              th Lähetetty
+              th Näytä
           tbody
             each application in applications
-              tr(data-application-id=application._id)
-                td
-                  | #{application.firstName} #{application.lastName}
-                td 
-                  | #{application.address} #{application.zipcode} #{application.city}
-                td #{application.phone}
+              tr
+                td #{application.lastName}
+                td #{application.firstName}
                 td #{application.email}
+                td #{application.added}
+                td
+                  a(href=root+'/application/'+application._id, target='blank') Näytä
