@@ -6,258 +6,158 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title #{application.firstName} #{application.lastName} kesätyöhakemus
+    title Vastaanotettu hakemus
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css')
     link(rel='stylesheet', href=root+'/css/animate.css')
     script
       | var SERVER_ROOT = "#{root}"; 
   body
-  - var getLanguageSkill = function(code){  
-  -   if(code === 'bad'){
-  -      return 'auttava';
-  -    }else if(code == 'ok'){
-  -      return 'kohtalainen';
-  -    }else if(code == 'good'){
-  -      return 'hyvä';
-  -    }
-  - }
     input#applicationId(type='hidden', value=application.id)
     .container
-      h3 Kesätyöhakemus
-      p Lähetetty: 
-        span#application-added(data-added=application.added)
+      h3 Hakemus linjalle: nettilukio
+      p
+        span.label.label-info Lähetetty:
+        span #{application.added}
       .row
         .col-md-6
+          h4 Henkilötiedot
           p
-            b Hakija:
-          address
-            strong #{application.firstName} #{application.lastName}
-            br
-            | #{application.address}
-            br
-            | #{application.zipcode} #{application.city}
-            br
-            abbr(title='Puhelin') Puh:
-            | #{application.phone}
-            br
-            a(href='mailto:'+application.email) #{application.email}
-            br
-            br
-            p
-              b Synt.aika: 
-              span#applicant-birthday #{application.birthday}
-            p
-              b Sukupuoli: 
-              span#applicant-sex #{application.sex}
-            p
-              b Synt.paikka: 
-              | #{application.placeOfBirth}
-            p
-              b Kotipaikka: 
-              | #{application.home}
-            p
-              b Ajokortti: 
-              each licence in application.driversLicence
-                  | #{licence}, 
-            p
-              b Ajokortin hankintavuosi: 
-              | #{application.driversLicenceYear}
-            p
-              b Koulutus:
-              br
-              | #{application.education}
-            p
-              b Kokemus:
-              br
-              | #{application.previousExpericence}
-            p
-              b ATK-taidot:
-              br
-              | #{application.itSkills}
-            if application.previouslyEmployed
-              p Työskennellyt aikaisemmin Mikkelin kaupungille: #{application.whenEmployed}
+            span.label.label-info Sukunimi:
+            span #{application.lastName}
+          p
+            span.label.label-info Etunimet:
+            span #{application.firstName}
+          p
+            span.label.label-info Lähiosoite:
+            span #{application.address}
+          p
+            span.label.label-info Postinumero:
+            span #{application.zipcode}
+          p
+            span.label.label-info Postitoimipaikka:
+            span #{application.city}
+          p
+            span.label.label-info Maa:
+            span #{application.country}
+          p
+            span.label.label-info Kotikunta:
+            span #{application.municipality}
+          p
+            span.label.label-info Äidinkieli:
+            span #{application.language}
+          p
+            span.label.label-info Kansalaisuus:
+            span #{application.nationality}
+          p
+            span.label.label-info Syntymäaika:
+            span #{application.birthday}
+          p
+            span.label.label-info Henkilötunnuksen loppu:
+            span #{application.ssn}
+          p
+            span.label.label-info Sukupuoli:
+            if application.sex == 'male'
+              span Mies
             else
-              p Ei työskennellyt aikaisemmin Mikkelin kaupungille
+              span Nainen
+          p
+            span.label.label-info Sähköpostiosoite:
+            span #{application.email}
+          p
+            span.label.label-info Puhelinnumero:
+            span #{application.phone}
+          p
+          br
+          if application.parent
+            h4 Perusteet alaikäisen hakuun ja huoltajan tiedot
             p
-              b Allergiat:
-              ul
-                each allergy in application.allergies
-                  li #{allergy}
+              span.label.label-info Alaikäisen hakuperusteet:
+              span #{application.parent.argumentForMinor}
             p
-              b Kielitaito:
-              ul
-                li Englanti: 
-                  if(application.languages.english)
-                    | #{getLanguageSkill(application.languages.english)}
-                  else
-                    | Ei
-                li Ruotsi: 
-                  if(application.languages.swedish)
-                    | #{getLanguageSkill(application.languages.swedish)}
-                  else
-                    | Ei
-                li Saksa: 
-                  if(application.languages.german)
-                    | #{getLanguageSkill(application.languages.german)}
-                  else
-                    | Ei
+              span.label.label-info Sukunimi:
+              span #{application.parent.lastName}
             p
-              b Sopiva työskentelyjakso
-              ul
-                each period in application.suitableWorkingPeriod
-                  li #{period}
+              span.label.label-info Etunimet:
+              span #{application.parent.firstName}
             p
-              b Käytettävissä olevat kulkuneuvot
-              ul
-                each transport in application.transportation
-                  li #{transport}
+              span.label.label-info Lähiosoite:
+              span #{application.parent.address}
             p
-              b Harrastukset yms:
-              br
-              | #{application.additionalInfo}
+              span.label.label-info Postinumero:
+              span #{application.parent.zipcode}
             p
-              b Ensisijainen hakutoive:
-              br
-              each position in positions
-                each job in position.jobs
-                  if job.code == application.primaryRequest
-                    | #{position.department} / #{job.name}
+              span.label.label-info Postitoimipaikka:
+              span #{application.parent.city}
             p
-              b Toissijainen hakutoive:
-              br
-              each position in positions
-                each job in position.jobs
-                  if job.code == application.secondaryRequest
-                    | #{position.department} / #{job.name}
-            if application.othersOk
-              p On valmis vastaanottamaan myös muuta työtä.
-            else
-              p Ei ole valmis vastaanottamaan muuta työtä.
-            p
-              b Perusohjaajakurssit:
-              br
-              | #{application.basicDirectorCourses}
-            p
-              b Lajiohjaajakurssit:
-              br
-              | #{application.fieldDirectorCourses}
-            p
-              b Liitteet:
-              br
-              ul
-                each appendix in appendices
-                  if(appendix)
-                    li
-                      a(href=root+'/upload/'+appendix._id, target='blank') #{appendix.originalname}
+              span.label.label-info Maa:
+              span #{application.parent.country}
+          h4 Muut tiedot
+          p
+            span.label.label-info Opiskelutavoitteet:
+            span #{application.nationality}
+          p
+            span.label.label-info Aiemmat opinnot:
+            span #{application.nationality}
+          p
+            span.label.label-info Tällä hetkellä oppilaitoksessa:
+            span #{application.nationality}
+          p
+            span.label.label-info Tällä hetkellä:
+            span #{application.nationality}
+          p
+            span.label.label-info Lisätietoja:
+            span #{application.nationality}
+          br
+          h4 Löysi meidät
+          p
+            span.label.label-info Löysi meidät:
+            span #{application.heardFrom.join()}
+          p
+            span.label.label-info Tarkennus:
+            span #{application.heardFromInfo}
+          br
+          h4 Liitteet
+            ul
+              each appendix in appendices
+                li
+                  a(href=root+'/upload/'+appendix._id, target='blank') #{appendix.originalname}
         .col-md-6.staff-fields
           img#loader-img(src='/img/ajax-loader.gif', style='display:none;float:left;')
           label.col-md-4.control-label(for='stateInput') Hakemuksen tila:
           br
           .radio
             label(for='stateInput-0')
-              if application.state == 'waiting'
-                input#stateInput-0(name='state', value='waiting', checked='checked', type='radio')
-              else
-                input#stateInput-0(name='state', value='waiting', type='radio')
-              | Käsittelemättä
+              input#stateInput-0(name='state', value='APPLIED', checked=application.state == 'APPLIED', type='radio')
+              | Vastaanotettu
           .radio
             label(for='stateInput-1')
-              if application.state == 'processing'
-                input#stateInput-1(name='state', value='processing', checked='checked', type='radio')
-              else
-                input#stateInput-1(name='state', value='processing', type='radio')
-              | Käsittelyssä
+              input#stateInput-1(name='state', value='INPROGRESS', checked=application.state == 'INPROGRESS', type='radio')
+              | Otettu käsittelyyn
           .radio
             label(for='stateInput-2')
-              if application.state == 'reserved'
-                input#stateInput-2(name='state', value='reserved', checked='checked', type='radio')
-              else
-                input#stateInput-2(name='state', value='reserved', type='radio')
-              | Varattu
+              input#stateInput-2(name='state', value='WAITING_OFFICIAL_APPROVAL', checked=application.state == 'WAITING_OFFICIAL_APPROVAL', type='radio')
+              | Odottaa virallista hyväksyntää
           .radio
             label(for='stateInput-3')
-              if application.state == 'notified'
-                input#stateInput-3(name='state', value='notified', checked='checked', type='radio')
-              else
-                input#stateInput-3(name='state', value='notified', type='radio')
-              | Ilmoitettu
+              input#stateInput-3(name='state', value='APPROVAL_SIGNED', checked=application.state == 'APPROVAL_SIGNED', type='radio')
+              | Hyväksyntä allekirjoitettu
           .radio
             label(for='stateInput-4')
-              if application.state == 'confirmed'
-                input#stateInput-4(name='state', value='confirmed',checked='checked', type='radio')
-              else
-                input#stateInput-4(name='state', value='confirmed', type='radio')
-              | Tulo varmistettu
+              input#stateInput-4(name='state', value='WAITING',checked=application.state == 'WAITING', type='radio')
+              | Odottaa
           .radio
             label(for='stateInput-5')
-              if application.state == 'contract'
-                input#stateInput-5(name='state', value='contract', checked='checked', type='radio')
-              else
-                input#stateInput-5(name='state', value='contract', type='radio')
-              | Työsopimus tehty
+              input#stateInput-5(name='state', value='RECEIVED', checked=application.state == 'RECEIVED', type='radio')
+              | Paikka vastaanotettu
           .radio
             label(for='stateInput-6')
-              if application.state == 'denied'
-                input#stateInput-6(name='state', value='denied', checked='checked', type='radio')
-              else
-                input#stateInput-6(name='state', value='denied', type='radio')
+              input#stateInput-6(name='state', value='APPROVED', checked=application.state == 'APPROVED', type='radio')
+              | Hyväksytty
+          .radio
+            label(for='stateInput-7')
+              input#stateInput-7(name='state', value='REJECTED', checked=application.state == 'REJECTED', type='radio')
               | Hylätty
-          br
-          label.col-md-4.control-label(for='unitInput') Yksikkö:
-          br
-          select#unitInput.form-control(name='organizationalUnit')
-            option(value='') Valitse...
-            each position in positions
-              option(value=position.department, selected=application.organizationalUnit == position.department) #{position.department}
-          br
-          label.col-md-4.control-label(for='jobInput') Tehtävä:
-          br
-          select#jobInput.form-control(name='job')
-            option(value='') Valitse...
-              each position in positions
-                optgroup(label=position.department)
-                  each job in position.jobs
-                    option(value=job.code, selected=application.job == job.code) #{job.name}
-          br
-          label.col-md-4.control-label(for='bossTitleInput') Esimiehen titteli:
-          br
-          input#bossTitleInput.form-control(type='text', name='bossTitle', value=application.bossTitle)
-          br
-          label.col-md-4.control-label(for='bossNameInput') Esimiehen nimi:
-          br
-          input#bossNameInput.form-control(type='text', name='bossName', value=application.bossName)
-          br
-          label.col-md-4.control-label(for='jobTimeInput') Viikkotyöaika:
-          br
-          select#jobTimeInput.form-control(name='workingHours')
-            option(value='30', selected=application.workingHours == 30) 30 tuntia
-          br
-          label.col-md-4.control-label(for='salaryInput') Kuukausipalkka:
-          br
-          input#salaryInput.form-control(type='text', name='salary', value=application.salary)
-          br
-          label.col-md-4.control-label(for='startDateInput') Aloituspäivä:
-          br
-          input#startDateInput.form-control(type='date', name='startDate', value=application.startDate)
-          br
-          label.col-md-4.control-label(for='endDateInput') Lopetuspäivä:
-          br
-          input#endDateInput.form-control(type='date', name='endDate', value=application.endDate)
-          br
-          label.col-md-4.control-label(for='ssnInput') Hetu:
-          br
-          input#ssnInput.form-control(type='text', name='ssn', value=application.ssn)
-          br
-          label.col-md-4.control-label(for='bankInfoInput') Pankkitili:
-          br
-          input#bankInfoInput.form-control(type='text', name='bankAccont', value=application.bankAccont)
-          br
-          label.col-md-4.control-label(for='huomInput') Lisätietoja:
-          br
-          textarea#huomInput.form-control(name='info')
-            | #{application.info}
-          br
           br
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
