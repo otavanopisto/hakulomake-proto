@@ -1,4 +1,5 @@
 var Application = require('../../model/application');
+var Comment = require('../../model/comment');
 var Appendix = require('../../model/appendix');
 var jade = require('jade');
 var mailer = require('../../services/mailer');
@@ -26,8 +27,17 @@ exports.getApplication = function(req, res){
       }, function(err){
         if(err){
           res.status(500).send();
+        }else{
+          Comment.find({
+            application: id
+          }, function(err, comments){
+            if(err){
+              res.status(500).send();
+            }else{
+              res.render('application', {application: application, appendices: appendices, comments: comments, root: config.server_root});
+            }
+          });
         }
-        res.render('application', {application: application, appendices: appendices, positions: config.positions, root: config.server_root});
       }); 
     }
   });

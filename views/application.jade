@@ -159,6 +159,15 @@ html(lang='en')
               input#stateInput-7(name='state', value='REJECTED', checked=application.state == 'REJECTED', type='radio')
               | Hylätty
           br
+          .form-group
+            label(for='new-comment-input') Lisää merkintä
+            textarea#new-comment-input.form-control
+          button#add-comment-btn.btn.btn-primary Tallenna
+          .comment-List
+            each comment in comments
+              .panel.panel-info
+                .panel-heading #{comment.user} #{comment.added}
+                .panel-body #{comment.text}
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js')
