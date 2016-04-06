@@ -35,7 +35,7 @@ app.use(expressValidator());
 
 require('./routes')(app);
 
-User.list({}, function(err, users){
+User.find({}, function(err, users){
   if(err){
     console.log(err);
   }else{
