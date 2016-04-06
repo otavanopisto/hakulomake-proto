@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/otavanopisto/hakulomake.git"
   },
-  "author": "Heikki Kurhinen <heikki.kurhinen@gmail.com> (http://elemmings.fi)",
+  "author": "Otavan Opisto",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/otavanopisto/hakulomake/issues"
