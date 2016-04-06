@@ -9,13 +9,13 @@ var config = require('./config');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var passport = require('passport');
+var User = require('./model/user');
+
 
 mongoose.connect('mongodb://' + config.database.host + '/' + config.database.table);
 require('./auth/passport')(passport);
 
 var app = express();
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -34,6 +34,26 @@ app.use(bodyParser.urlencoded({
 app.use(expressValidator());
 
 require('./routes')(app);
+
+User.list({}, function(err, users){
+  if(err){
+    console.log(err);
+  }else{
+    if(users.length == 0){
+      var newuser = new User();
+      newuser.email = config.defaultUser.name,
+      newuser.password = newuser.generateHash(config.defaultUser.pw);
+      newuser.role = 'admin';
+      newuser.save(function(err, user){
+        if(err){
+          console.log(err);
+        }else{
+          console.log('Created default user since none existed');
+        }
+      });
+    }
+  }
+});
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
