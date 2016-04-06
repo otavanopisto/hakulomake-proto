@@ -19,6 +19,36 @@
     })
   });
   
+  $('#lastnameInput').blur(function(){
+    var lastName = $(this).val();
+    if(lastName[0] !== lastName[0].toUpperCase()){
+      noty({
+			  text: 'Olet kirjoittanut sukunimesi pienellä alkukirjaimella, tarkista kirjoitusasu.',
+				type: 'error',
+			    timeout: 3000,
+				animation: {
+			        open: 'animated fadeIn',
+			        close: 'animated fadeOut',
+			    }
+			});
+    }
+  });
+  
+  $('#firstnameInput').blur(function(){
+    var firstName = $(this).val();
+    if(firstName[0] !== firstName[0].toUpperCase()){
+      noty({
+			  text: 'Olet kirjoittanut etunimesi pienellä alkukirjaimella, tarkista kirjoitusasu.',
+				type: 'error',
+			    timeout: 3000,
+				animation: {
+			        open: 'animated fadeIn',
+			        close: 'animated fadeOut',
+			    }
+			});
+    }
+  });
+  
   $('#birthdayInput').change(function(){
     var now = moment().valueOf();
     var birthday = moment($(this).val(), 'D.M.YYYY').valueOf();
