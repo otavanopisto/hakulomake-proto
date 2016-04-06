@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+  state: {type: String, default: 'APPLIED'},
   added: {type: Number, default: Date.now },
   lastName : { type: String, required: true },
   firstName : { type: String, required: true },
