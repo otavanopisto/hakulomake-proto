@@ -11,11 +11,11 @@ var path = require('path');
 var fs = require('fs');
 var PyramusClient = require('../services/pyramusClient');
 var pyramusClient = new PyramusClient({
-  appId: '8df25fa7-2d34-4f0a-8c35-8e60aa753927',
-  appSecret: 'aeVt7LUBNcW74Ziji2AfX2ZVFXaATCftl0FpwTMnsEzV6etXtRLFu9hmXarN0i3gC5Gg2MphYnppVAnG',
-  pyramusUrl: 'https://dev.pyramus.fi:8443/1/',
-  redirectURI: 'http://localhost:3000/auth_code',
-  authCode: 'f2f34423cc39021acc6ec884ae935a78'
+  appId: config.pyramus.appId,
+  appSecret: config.pyramus.appSecret,
+  pyramusUrl: config.pyramus.pyramusUrl,
+  redirectURI: config.pyramus.redirectURI,
+  authCode: config.pyramus.authCode
 });
 
 function authenticate(allowedRoles) {
@@ -34,19 +34,6 @@ function authenticate(allowedRoles) {
 }
 
 module.exports = function(app){
-  
-  /*var User = require('../model/user');
-  
-  var newuser = new User();
-  newuser.email = 'heikki.kurhinen@otavanopisto.fi',
-  newuser.password = newuser.generateHash('qwerty');
-  newuser.role = 'admin';
-  newuser.save(function(err, user){
-    if(err){
-      console.log(err);
-    }
-    console.log(user);
-  });*/
   
   /*
    * Navigation
