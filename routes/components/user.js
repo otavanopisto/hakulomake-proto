@@ -40,7 +40,7 @@ exports.create = function(req, res) {
                   res.status(500).send(err);
                 }else{
                   var resetUrl = 'http://'+req.headers.host+config.server_root+'/resetpassword/'+encodeURIComponent(resetToken.token);
-                  mailer.sendMail(email, 'Kesäpesti - käyttäjätili', 'Sinullle on luotu käyttäjätili Kesäpesti - sovellukseen. Käy aktivoimassa tilisi osoitteessa: ' +
+                  mailer.sendMail(email, 'Käyttäjätili', 'Sinullle on luotu käyttäjätili. Käy aktivoimassa tilisi osoitteessa: ' +
                     resetUrl + ' Tämä kutsu vanhenee 48 tunnin kuluttua.');
                   res.redirect(config.server_root+'/user/manage');
                 }
@@ -120,7 +120,7 @@ exports.forgotpassword = function(req, res) {
             res.status(500).send(err);
           }else{
             var resetUrl = 'http://'+req.headers.host+config.server_root+'/resetpassword/'+encodeURIComponent(resetToken.token);
-            mailer.sendMail(email, 'Salasanan palautus', 'Olet pyytänyt salasanasi palautusta Kesäpesti - sovelluksessa, voit palauttaa salasanasi menemällä osoitteeseen: ' +
+            mailer.sendMail(email, 'Salasanan palautus', 'Olet pyytänyt salasanasi palautusta Otavan Opiston hakulomakkeella, voit palauttaa salasanasi menemällä osoitteeseen: ' +
                 resetUrl + ' Jos et ole pyytänyt salasanan palautusta, voit jättää tämän viestin huomiotta.');
             res.send('success');
           }

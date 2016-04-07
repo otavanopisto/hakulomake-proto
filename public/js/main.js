@@ -147,7 +147,7 @@
 		$('.error-container').remove();
 		$.post(SERVER_ROOT+'/application', values, function(res){
 			noty({
-			    text: 'Kesätyöhakemus lähetetty onnistuneesti.',
+			    text: 'Hakemus on lähetetty onnistuneesti.',
 				type: 'success',
 				timeout: 3000,
 			    animation: {
