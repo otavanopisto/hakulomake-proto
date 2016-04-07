@@ -4,11 +4,11 @@ var user = require('./components/user');
 var comment = require('./components/comment');
 var config = require('../config');
 var multer  = require('multer');
+var path = require('path');
 var Appendix = require('../model/appendix');
 var uploadDirectory = path.resolve(config.upload_directory || __dirname + '../uploads');
 var upload = multer({ dest: uploadDirectory }); //Upload directory
 var async = require('async');
-var path = require('path');
 var fs = require('fs');
 var PyramusClient = require('../services/pyramusClient');
 var pyramusClient = new PyramusClient({
@@ -99,6 +99,7 @@ module.exports = function(app){
         res.status(404).send();
       }else{
         res.set('Content-Type', appendix.mimetype);
+        res.set('Content-Disposition', 'attachment; filename="' + appendix.originalname + '"');
         res.sendFile(uploadDirectory + '/' + appendix.filename);
       }
     });
@@ -110,10 +111,14 @@ module.exports = function(app){
       if(err || !appendix){
         res.status(404).send();
       }else{
-        fs.unlink(uploadDirectory + appendix.filename, function(){
-          Appendix.findByIdAndRemove(id, function(){
-            res.send({status: 'removed'});
-          });
+        fs.unlink(uploadDirectory + '/' + appendix.filename, function(err){
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            Appendix.findByIdAndRemove(id, function(){
+              res.send({status: 'removed'});
+            });
+          }
         });
       }
     });
