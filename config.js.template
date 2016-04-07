@@ -2,6 +2,7 @@ module.exports = {
   port: 3000,
   server_root: '',
   session_secret: '',
+  upload_directory: '',
   mail: {
     api_key: '',
     domain: '',
