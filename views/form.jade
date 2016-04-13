@@ -7,6 +7,7 @@ html(lang='en')
     meta(name='description', content='')
     meta(name='author', content='')
     title Hae opiskelijaksi nettilukioon
+    link(rel='stylesheet', href=root+'https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700')    
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css')
     link(rel='stylesheet', href=root+'/css/jquery.fileupload.css')
@@ -16,19 +17,19 @@ html(lang='en')
       | var SERVER_ROOT = "#{root}"; 
   body
     .container
-      h3 Hae Nettilukioon
-      br
-      br
-      .row
       .col-lg-2
-      .col-lg-8
-        form#main-form.form-horizontal
+      .col-lg-8.form-container
+        .header.col-lg-12
+        .form-title.col-lg-12
+          h3 Hakulomake 
+        form#main-form.form-horizontal.col-lg-12
           h4 Henkilötiedot
           br
           .form-group
             label.control-label.col-lg-2(for='lastnameInput') Sukunimi:
             .col-lg-3
               input#lastnameInput.form-control.input-sm(name='lastnameInput', placeholder='sukunimi', required='required', type='text')
+              span
             label.control-label.col-lg-2(for='firstnameInput') Etunimet:
             .col-lg-5
               input#firstnameInput.form-control.input-sm(name='firstnameInput', placeholder='etunimet', required='required', type='text')

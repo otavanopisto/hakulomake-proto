@@ -1,32 +1,65 @@
-input:required:invalid, input:focus:invalid {
-  background-image: url(../img/cross.png);
-  background-position: right center;
-  background-repeat: no-repeat;
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-text-size-adjust: 100%;
+   -ms-text-size-adjust: 100%;
+   background-image: url("/img/main-background-slice.png");
+   background-position: left top;
+   background-repeat: repeat-x;
+   background-color:#F6FCFF;
+}
+.form-horizontal{
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.1);
+}
+.form-horizontal .form-group{
+  margin-left:auto;
+  margin-right:auto;
+  
+}
+
+input.form-control, textarea.form-control, select.form-control{
+  border:2px solid #dadada; 
+}
+
+.header{
+  height:100px;
+  background-image: url("/img/logo_otavanopisto.png"),url("/img/karuselli_nettilukio_400x400.png") ;
+  background-position: left 10px bottom 10px, right 10px bottom 10px;
+  background-size: 200px auto, 80px 80px;
+  background-repeat: no-repeat, no-repeat;
+}
+.form-container{
+  background-color:#fff;
+  padding:0;
+}
+.form-title{
+  background-color:#489bc4;
+  padding:10px;
+}
+.form-title h3{
+  color:#fff;
+  margin-bottom:0;
+  margin-top:0;
+}
+
+input.validating:required:invalid, input:focus:invalid {
+  border:2px solid #ff7640;
 }
 input:required:valid {
-  background-image: url(../img/tick.png);
-  background-position: right center;
-  background-repeat: no-repeat;
+  border:2px solid #9cf3c7; 
 }
-textarea:required:invalid, input:focus:invalid {
-  background-image: url(../img/cross.png);
-  background-position: right center;
-  background-repeat: no-repeat;
+
+textarea.validating:required:invalid, input:focus:invalid {
+  border:2px solid #ff7640;
 }
 textarea:required:valid {
-  background-image: url(../img/tick.png);
-  background-position: right center;
-  background-repeat: no-repeat;
+  border:2px solid #9cf3c7; 
 }
-select:required:invalid, input:focus:invalid {
-  background-image: url(../img/cross.png);
-  background-position: right center;
-  background-repeat: no-repeat;
+select.validating:required:invalid, input:focus:invalid {
+  border:2px solid #ff7640;
 }
 select:required:valid {
-  background-image: url(../img/tick.png);
-  background-position: right center;
-  background-repeat: no-repeat;
+  border:2px solid #9cf3c7; 
 }
 
 .parentInfo,
@@ -38,5 +71,5 @@ select:required:valid {
 }
 
 .error-container {
-  color:red;
+  color:#ff7640;
 }

@@ -1,5 +1,10 @@
 (function(){
 	'use strict';
+
+  $('input').focus(function(){
+    $(this).addClass("validating");
+  });
+  
 	
 	$('input[data-type="date"]').datepicker({
 		language: 'fi',
@@ -19,6 +24,7 @@
     })
   });
   
+
   $('#lastnameInput').blur(function(){
     var lastName = $(this).val();
     if(lastName[0] !== lastName[0].toUpperCase()){
