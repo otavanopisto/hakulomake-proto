@@ -8,19 +8,19 @@ body {
    background-repeat: repeat-x;
    background-color:#F6FCFF;
 }
-.form-horizontal{
-   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.1);
+
+.form-container{
+   box-shadow:  0 0 8px 0 rgba(102, 175, 233, 0.1);    
 }
+
 .form-horizontal .form-group{
   margin-left:auto;
   margin-right:auto;
   
 }
-
 input.form-control, textarea.form-control, select.form-control{
   border:2px solid #dadada; 
 }
-
 .header{
   height:100px;
   background-image: url("/img/logo_otavanopisto.png"),url("/img/karuselli_nettilukio_400x400.png") ;
@@ -41,14 +41,12 @@ input.form-control, textarea.form-control, select.form-control{
   margin-bottom:0;
   margin-top:0;
 }
-
 input.validating:required:invalid, input:focus:invalid {
   border:2px solid #ff7640;
 }
 input:required:valid {
   border:2px solid #9cf3c7; 
 }
-
 textarea.validating:required:invalid, input:focus:invalid {
   border:2px solid #ff7640;
 }
@@ -61,7 +59,6 @@ select.validating:required:invalid, input:focus:invalid {
 select:required:valid {
   border:2px solid #9cf3c7; 
 }
-
 .parentInfo,
 .currentSchoolContainer,
 .additionalActivityInputContainer,
@@ -69,7 +66,6 @@ select:required:valid {
 .additionalPrevStudyContainer {
   display: none;
 }
-
 .error-container {
   color:#ff7640;
 }

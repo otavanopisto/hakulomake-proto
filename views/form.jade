@@ -17,8 +17,8 @@ html(lang='en')
       | var SERVER_ROOT = "#{root}"; 
   body
     .container
-      .col-lg-2
-      .col-lg-8.form-container
+      .col-lg-2.col-md-1
+      .col-lg-8.col-md-10.form-container
         .header.col-lg-12
         .form-title.col-lg-12
           h3 Hakulomake 
@@ -26,25 +26,25 @@ html(lang='en')
           h4 Henkilötiedot
           br
           .form-group
-            label.control-label.col-lg-2(for='lastnameInput') Sukunimi:
-            .col-lg-3
+            label.control-label.col-lg-2.col-md-2(for='lastnameInput') Sukunimi:
+            .col-lg-3.col-md-3
               input#lastnameInput.form-control.input-sm(name='lastnameInput', placeholder='sukunimi', required='required', type='text')
               span
-            label.control-label.col-lg-2(for='firstnameInput') Etunimet:
-            .col-lg-5
+            label.control-label.col-lg-2.col-md-2(for='firstnameInput') Etunimet:
+            .col-lg-5.col-md-5
               input#firstnameInput.form-control.input-sm(name='firstnameInput', placeholder='etunimet', required='required', type='text')
           .form-group
-            label.control-label.col-lg-2(for='birthdayInput') Syntymäaika:
-            .col-lg-3
+            label.control-label.col-lg-2.col-md-2(for='birthdayInput') Syntymäaika:
+            .col-lg-3.col-md-3
               input#birthdayInput.form-control.input-sm(name='birthdayInput', placeholder='syntymäaika', required='required', type='text', data-type='date')
               span.help-block Esitysmuoto: 29.02.2016
-            label.control-label.col-lg-2(for='ssnInput') HETU loppuosa: 
-            .col-lg-2
+            label.control-label.col-lg-2.col-md-2(for='ssnInput') HETU loppuosa: 
+            .col-lg-2.col-md-2
               input#ssnInput.form-control.input-sm(name='ssnInput', placeholder='henkilötunnuksen loppuosa', required='required', type='text')
               span.help-block Esitysmuoto: XXXX
-            label.control-label.col-lg-1(for='sexInput') Suku- puoli: 
-            .col-lg-2
-              select#sexInput.form-control.input-sm(name='sexInput', required='required')
+            label.control-label.col-lg-1.col-md-1(for='sexInput') Suku- puoli: 
+            .col-lg-2.col-md-2
+              select#sexInput.show-menu-arrow.form-control.input-sm(name='sexInput', required='required')
                 option(value='') valitse...
                 option(value='male') Mies
                 option(value='female') Nainen
@@ -53,11 +53,11 @@ html(lang='en')
             .col-lg-10
               input#addressInput.form-control.input-sm(name='addressInput', placeholder='Lähiosoite', required='required', type='text')
           .form-group
-            label.control-label.col-lg-2(for='zipcodeInput') Postinumero:
-            .col-lg-4
+            label.control-label.col-lg-2.col-md-2(for='zipcodeInput') Postinumero:
+            .col-lg-4.col-md-4
               input#zipcodeInput.form-control.input-sm(name='zipcodeInput', placeholder='Postinumero', required='required', type='text', pattern='[0-9]{5}')
-            label.control-label.col-lg-2(for='cityInput') Postitoimipaikka:
-            .col-lg-4
+            label.control-label.col-lg-2.col-md-3(for='cityInput') Postitoimipaikka:
+            .col-lg-4.col-md-3
               input#cityInput.form-control.input-sm(name='cityInput', placeholder='Postitoimipaikka', required='required', type='text')
           .form-group
             label.control-label.col-lg-2(for='countryInput') Maa:
@@ -250,7 +250,7 @@ html(lang='en')
             .col-lg-4
               img#loader-img(src=root+'/img/ajax-loader.gif', style='display:none;')
               button#submitAssigmentBtn.btn.btn-lg.btn-primary.pull-right(name='submitAssigmentBtn') Lähetä
-      .col-lg-2
+      .col-lg-2.col-md-1
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
