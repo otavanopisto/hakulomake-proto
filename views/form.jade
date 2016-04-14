@@ -7,21 +7,21 @@ html(lang='en')
     meta(name='description', content='')
     meta(name='author', content='')
     title Hae opiskelijaksi nettilukioon
-    link(rel='stylesheet', href=root+'https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700')    
+    link(rel='stylesheet', href=root+'https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css')
     link(rel='stylesheet', href=root+'/css/jquery.fileupload.css')
     link(rel='stylesheet', href=root+'/css/animate.css')
     link(rel='stylesheet', href=root+'/css/main.css')
     script
-      | var SERVER_ROOT = "#{root}"; 
+      | var SERVER_ROOT = "#{root}";
   body
     .container
-      .col-lg-2.col-md-1
-      .col-lg-8.col-md-10.form-container
+      .col-lg-1.col-md-1
+      .col-lg-10.col-md-10.form-container
         .header.col-lg-12
         .form-title.col-lg-12
-          h3 Hae opiskelijaksi 
+          h3 Hae opiskelijaksi
         form#main-form.form-horizontal.col-lg-12
           h4 Henkilötiedot
           br
@@ -38,11 +38,11 @@ html(lang='en')
             .col-lg-3.col-md-3
               input#birthdayInput.form-control.input-sm(name='birthdayInput', placeholder='syntymäaika', required='required', type='text', data-type='date')
               span.help-block Esitysmuoto: 29.02.2016
-            label.control-label.col-lg-2.col-md-2(for='ssnInput') HETU loppuosa: 
+            label.control-label.col-lg-2.col-md-2(for='ssnInput') HETU loppuosa:
             .col-lg-2.col-md-2
               input#ssnInput.form-control.input-sm(name='ssnInput', placeholder='henkilötunnuksen loppuosa', required='required', type='text')
               span.help-block Esitysmuoto: XXXX
-            label.control-label.col-lg-1.col-md-1(for='sexInput') Suku- puoli: 
+            label.control-label.col-lg-1.col-md-1(for='sexInput') Suku- puoli:
             .col-lg-2.col-md-2
               select#sexInput.show-menu-arrow.form-control.input-sm(name='sexInput', required='required')
                 option(value='') valitse...
@@ -62,8 +62,8 @@ html(lang='en')
           .form-group
             label.control-label.col-lg-2.col-md-2(for='countryInput') Maa:
             .col-lg-10.col-md-10
-              input#countryInput.form-control.input-sm(name='countryInput', placeholder='maa', required='required', type='text') 
-          .form-group  
+              input#countryInput.form-control.input-sm(name='countryInput', placeholder='maa', required='required', type='text')
+          .form-group
             .col-lg-4.col-md-4
               label.control-label(for='municipalityInput') Kotikunta:
               select#municipalityInput.form-control.input-sm(name='municipalityInput', required='required')
@@ -77,7 +77,7 @@ html(lang='en')
                 each nationality in nationalities
                   option(value=nationality.code) #{nationality.name}
             .col-lg-4.col-md-4
-              label.control-label(for='languageInput') Äidinkieli:  
+              label.control-label(for='languageInput') Äidinkieli:
               select#languageInput.form-control.input-sm(name='languageInput', required='required')
                 option(value='') Valitse...
                 each language in languages
@@ -157,7 +157,7 @@ html(lang='en')
                 option(value='2') Työtön
                 option(value='3') Opiskelija
                 option(value='4') Eläkeläinen
-                option(value='5') Muu      
+                option(value='5') Muu
           .form-group.additionalActivityInputContainer
             label.control-label.col-lg-3(for='additionalActivityInput') Kerro tarkemmin:
             .col-lg-9
@@ -211,34 +211,36 @@ html(lang='en')
           br
           .form-group
             span.help-block Valitse ainakin yksi...
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Lehti-ilmoituksesta
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Lehtiartikkelista
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Internetistä
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Suoramainonnasta
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Radiosta
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Televisiosta
-            .checkbox
-              label
-                input(type='checkbox', name='heardFromInput')
-                | Muu
+            .row
+              .checkbox.col-lg-3.col-md-3.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Lehti-ilmoituksesta
+              .checkbox.col-lg-3.col-md-3.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Lehtiartikkelista
+              .checkbox.col-lg-3.col-md-3.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Internetistä
+              .checkbox.col-lg-3.col-md-3.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Suoramainonnasta
+            .row      
+              .checkbox.col-lg-3.col-md-3.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Radiosta
+              .checkbox.col-lg-3.col-md-3.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Televisiosta
+              .checkbox.col-lg-6.col-md-6.col-sm-12.col-xs-12
+                label
+                  input(type='checkbox', name='heardFromInput')
+                  | Muu
           .form-group
             label.col-lg-3.control-label(for='heardFromInfoInput') Kerro tarkemmin:
             .col-lg-9
@@ -248,8 +250,8 @@ html(lang='en')
             .col-lg-4.col-md-4.col-sm-6.col-xs-10
               img#loader-img(src=root+'/img/ajax-loader.gif', style='display:none;')
               button#submitAssigmentBtn.btn.btn-lg.btn-primary.col-lg-12.col-md-12.col-sm-12.col-xs-12(name='submitAssigmentBtn') Lähetä
-            .col-lg-4.col-md-4.col-sm-3.col-xs-1  
-      .col-lg-2.col-md-1
+            .col-lg-4.col-md-4.col-sm-3.col-xs-1
+      .col-lg-1.col-md-1
     script(src='https://code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
