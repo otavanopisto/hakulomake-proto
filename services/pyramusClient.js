@@ -30,13 +30,14 @@ PyramusClient.prototype._createAccessToken = function(callback){
         callback('Server returned status: '+res.statusCode);
       }else{
         _this.token = JSON.parse(body);
+        _this.tokenExpires = Date.now() + (_this.token.expires_in * 1000);
         setTimeout(function(){
           _this._refreshAccessToken(function(err){
             if(err){
               console.log('Error refreshing token: '+err);
             }
           });
-        },(_this.token.expires_in - EXPIRE_SLACK) * 10);
+        },(_this.token.expires_in - EXPIRE_SLACK) * 1000);
         callback(null);
       }
   });
@@ -61,13 +62,14 @@ PyramusClient.prototype._refreshAccessToken = function(callback){
         callback('Server returned status: '+res.statusCode);
       }else{
         _this.token = JSON.parse(body);
+        _this.tokenExpires = Date.now() + (_this.token.expires_in * 1000);
         setTimeout(function(){
           _this._refreshAccessToken(function(err){
             if(err){
               console.log('Error refreshing token: '+err);
             }
           });
-        },(_this.token.expires_in - EXPIRE_SLACK) * 10);
+        },(_this.token.expires_in - EXPIRE_SLACK) * 1000);
         callback(null);
       }
   });
@@ -98,6 +100,14 @@ PyramusClient.prototype._prepareRequest = function(url, callback){
       if(err){
         callback(err);
       }else{
+        _this._performRequest(url, callback);
+      }
+    });
+  } else if(Date.now > _this.tokenExpires){
+    _this._refreshAccessToken(function(err){
+      if(err){
+        callback(err);
+      }else {
         _this._performRequest(url, callback);
       }
     });
